@@ -1,0 +1,22 @@
+﻿using HappyTravel.Sunpu.Api.Infrastructure.Environment;
+using HappyTravel.Telemetry.Extensions;
+
+namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+
+public static class ConfigureTracingExtension
+{
+    public static void ConfigureTracing(this IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration) //, string redisEndpoint)
+    {
+        services.AddTracing(configuration, options =>
+        {
+            options.ServiceName = $"{environment.ApplicationName}-{environment.EnvironmentName}";
+            options.JaegerHost = environment.IsLocal()
+                ? configuration.GetValue<string>("Jaeger:AgentHost")
+                : configuration.GetValue<string>(configuration.GetValue<string>("Jaeger:AgentHost"));
+            options.JaegerPort = environment.IsLocal()
+                ? configuration.GetValue<int>("Jaeger:AgentPort")
+                : configuration.GetValue<int>(configuration.GetValue<string>("Jaeger:AgentPort"));
+            //options.RedisEndpoint = redisEndpoint;
+        });
+    }
+}

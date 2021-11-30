@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyTravel.Sunpu.Api", "HappyTravel.Sunpu.Api\HappyTravel.Sunpu.Api.csproj", "{18658E16-183A-4320-A3AD-277DD24E8D15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{76B4458A-FA6A-4FA2-9D44-12730E141DC6} = {76B4458A-FA6A-4FA2-9D44-12730E141DC6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyTravel.Sunpu.Data", "HappyTravel.Sunpu.Data\HappyTravel.Sunpu.Data.csproj", "{76B4458A-FA6A-4FA2-9D44-12730E141DC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyTravel.Sunpu.UnitTests", "HappyTravel.Sunpu.UnitTests\HappyTravel.Sunpu.UnitTests.csproj", "{7B94CBCF-5381-45ED-A2E1-1A61C1232B0E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18658E16-183A-4320-A3AD-277DD24E8D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18658E16-183A-4320-A3AD-277DD24E8D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18658E16-183A-4320-A3AD-277DD24E8D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18658E16-183A-4320-A3AD-277DD24E8D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B4458A-FA6A-4FA2-9D44-12730E141DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B4458A-FA6A-4FA2-9D44-12730E141DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B4458A-FA6A-4FA2-9D44-12730E141DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B4458A-FA6A-4FA2-9D44-12730E141DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B94CBCF-5381-45ED-A2E1-1A61C1232B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B94CBCF-5381-45ED-A2E1-1A61C1232B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B94CBCF-5381-45ED-A2E1-1A61C1232B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B94CBCF-5381-45ED-A2E1-1A61C1232B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D3DF6D8-C399-4B58-86E3-35B846A88BC1}
+	EndGlobalSection
+EndGlobal
