@@ -39,7 +39,7 @@ namespace HappyTravel.Sunpu.Data
         private static Dictionary<string, string> GetDbOptions(IConfiguration configuration)
         {
             var vaultUrl = Environment.GetEnvironmentVariable(configuration["Vault:Endpoint"])
-                           ?? throw new ArgumentException("Could not obtain Vault endpoint environment variables");
+                ?? throw new ArgumentException("Could not obtain Vault endpoint environment variables");
 
             using var vaultClient = new VaultClient.VaultClient(new VaultOptions
             {
