@@ -1,6 +1,5 @@
-﻿namespace HappyTravel.Sunpu.Api.Services
+﻿namespace HappyTravel.Sunpu.Api.Services;
+
+public interface ISupplierService
 {
-    public interface ISupplierService
-    {
-    }
 }
