@@ -1,4 +1,5 @@
-﻿using HappyTravel.Sunpu.Api.Services;
+﻿using HappyTravel.Sunpu.Api.Models;
+using HappyTravel.Sunpu.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -19,13 +20,13 @@ public class SupplierController : BaseController
     /// <summary>
     /// Gets a list of suppliers
     /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns>List of suppliers</returns>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of slim suppliers</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
+    [ProducesResponseType(typeof(List<SlimSupplier>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
-        return Ok("Empty list");
+        return Ok(await _supplierService.Get(cancellationToken));
     }
 
 

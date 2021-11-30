@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HappyTravel.Sunpu.Data\HappyTravel.Sunpu.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="HappyTravel.Sunpu.Api.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
