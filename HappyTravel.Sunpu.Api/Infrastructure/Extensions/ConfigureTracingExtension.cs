@@ -5,7 +5,7 @@ namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
 
 public static class ConfigureTracingExtension
 {
-    public static void ConfigureTracing(this IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration) //, string redisEndpoint)
+    public static void ConfigureTracing(this IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration)
     {
         services.AddTracing(configuration, options =>
         {
@@ -16,7 +16,6 @@ public static class ConfigureTracingExtension
             options.JaegerPort = environment.IsLocal()
                 ? configuration.GetValue<int>("Jaeger:AgentPort")
                 : configuration.GetValue<int>(configuration.GetValue<string>("Jaeger:AgentPort"));
-            //options.RedisEndpoint = redisEndpoint;
         });
     }
 }
