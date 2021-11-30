@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,10 +27,19 @@
     <Folder Include="Infrastructure\Logging\" />
   </ItemGroup>
 
-	<ItemGroup>
-		<None Update="HappyTravel.Sunpu.Api.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+    <None Update="HappyTravel.Sunpu.Api.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702;1591</NoWarn>
+		<DocumentationFile>..\HappyTravel.Sunpu.Api\HappyTravel.Sunpu.Api.xml</DocumentationFile>
+	</PropertyGroup>
 	
 </Project>

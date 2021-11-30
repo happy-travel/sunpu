@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HappyTravel.Sunpu.Api</name>
+    </assembly>
+    <members>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Get(System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of suppliers
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>List of suppliers</returns>
+        </member>
+    </members>
+</doc>
