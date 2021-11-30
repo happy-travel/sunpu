@@ -18,7 +18,7 @@ public class SunpuContextFactory : IDesignTimeDbContextFactory<SunpuContext>
         var dbOptions = GetDbOptions(configuration);
 
         var dbContextOptions = new DbContextOptionsBuilder<SunpuContext>();
-        ((DbContextOptionsBuilder)dbContextOptions).UseNpgsql(GetConnectionString(dbOptions), builder => builder.UseNetTopologySuite());
+        ((DbContextOptionsBuilder)dbContextOptions).UseNpgsql(GetConnectionString(dbOptions));
         var context = new SunpuContext(dbContextOptions.Options);
         context.Database.SetCommandTimeout(int.Parse(dbOptions["migrationCommandTimeout"]));
 
