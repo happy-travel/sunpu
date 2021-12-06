@@ -24,7 +24,12 @@ public static class SupplierExtension
             Id = supplier.Id,
             Name = supplier.Name,
             IsEnable = supplier.IsEnable,
-            ConnectorUrl = supplier.ConnectorUrl
+            ConnectorUrl = supplier.ConnectorUrl,
+            WebSite = supplier.WebSite,
+            Description = supplier.Description,
+            PrimaryContact = supplier.PrimaryContact,
+            SupportContacts = supplier.SupportContacts,
+            ReservationsContacts = supplier.ReservationsContacts
         };
     }
 }
