@@ -30,5 +30,19 @@ public class SupplierController : BaseController
     }
 
 
+    /// <summary>
+    /// Gets a supplier by id
+    /// </summary>
+    /// <param name="supplierId">Supplier id</param>
+    /// <param name="cancellationToken">Сancellation token</param>
+    /// <returns></returns>
+    [HttpGet("supplierId")]
+    [ProducesResponseType(typeof(SupplierData), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Get([FromRoute] int supplierId, CancellationToken cancellationToken)
+    {
+        return Ok(await _supplierService.Get(supplierId, cancellationToken));
+    }
+
+
     private readonly ISupplierService _supplierService;
 }

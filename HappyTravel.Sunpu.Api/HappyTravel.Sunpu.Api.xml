@@ -8,8 +8,16 @@
             <summary>
             Gets a list of suppliers
             </summary>
-            <param name="cancellationToken"></param>
-            <returns>List of suppliers</returns>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>List of slim suppliers</returns>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Get(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gets a supplier by id
+            </summary>
+            <param name="supplierId">Supplier id</param>
+            <param name="cancellationToken">Сancellation token</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

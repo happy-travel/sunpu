@@ -21,5 +21,13 @@ public class SupplierService : ISupplierService
     }
 
 
+    public async Task<SupplierData> Get(int id, CancellationToken cancellationToken)
+    {
+        var supplier = await _sunpuContext.Suppliers.SingleOrDefaultAsync(s => s.Id == id);
+
+        return supplier.ToSupplierData();
+    }
+
+
     private readonly SunpuContext _sunpuContext;
 }

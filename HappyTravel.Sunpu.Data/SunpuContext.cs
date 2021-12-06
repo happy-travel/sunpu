@@ -19,7 +19,7 @@ public class SunpuContext : DbContext
             e.Property(s => s.IsEnable).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();
             e.Property(s => s.Created).IsRequired();
-            e.Property(s => s.Updated).IsRequired();
+            e.Property(s => s.Modified).IsRequired();
         });
     }
 

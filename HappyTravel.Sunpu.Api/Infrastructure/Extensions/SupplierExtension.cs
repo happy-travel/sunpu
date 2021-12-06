@@ -15,4 +15,16 @@ public static class SupplierExtension
             ConnectorUrl = supplier.ConnectorUrl
         };
     }
+
+
+    public static SupplierData ToSupplierData(this Supplier supplier)
+    {
+        return new SupplierData
+        {
+            Id = supplier.Id,
+            Name = supplier.Name,
+            IsEnable = supplier.IsEnable,
+            ConnectorUrl = supplier.ConnectorUrl
+        };
+    }
 }
