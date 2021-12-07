@@ -19,5 +19,28 @@
             <param name="cancellationToken">Сancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Add(HappyTravel.Sunpu.Api.Models.SupplierData,System.Threading.CancellationToken)">
+            <summary>
+            Adds a new supplier 
+            </summary>
+            <param name="supplierData">Supplier data</param>
+            <param name="cancellationToken">Сancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Modify(System.Int32,HappyTravel.Sunpu.Api.Models.SupplierData,System.Threading.CancellationToken)">
+            <summary>
+            Modifies an existing supplier
+            </summary>
+            <param name="supplierData">New data for the supplier</param>
+            <param name="cancellationToken">Сancellation token</param>
+            <param name="supplierId">Supplier id</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a supplier
+            </summary>
+            <param name="supplierId">Supplier id</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
     </members>
 </doc>

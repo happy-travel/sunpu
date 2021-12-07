@@ -23,7 +23,7 @@ public class SunpuContext : DbContext
             e.Property(s => s.SupportContacts).HasColumnType("");
             e.Property(s => s.ReservationsContacts).HasColumnType("");
             e.Property(s => s.Created).IsRequired();
-            e.Property(s => s.Modified).IsRequired();
+            e.Property(s => s.Modified);
         });
     }
 

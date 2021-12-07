@@ -1,7 +1,6 @@
 ﻿using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Api.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace HappyTravel.Sunpu.Api.Controllers;
 
@@ -23,11 +22,9 @@ public class SupplierController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>List of slim suppliers</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(List<SlimSupplier>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(List<SlimSupplier>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get(CancellationToken cancellationToken)
-    {
-        return Ok(await _supplierService.Get(cancellationToken));
-    }
+        => Ok(await _supplierService.Get(cancellationToken));
 
 
     /// <summary>
@@ -36,12 +33,49 @@ public class SupplierController : BaseController
     /// <param name="supplierId">Supplier id</param>
     /// <param name="cancellationToken">Сancellation token</param>
     /// <returns></returns>
-    [HttpGet("supplierId")]
-    [ProducesResponseType(typeof(SupplierData), (int)HttpStatusCode.OK)]
+    [HttpGet("{supplierId:int}")]
+    [ProducesResponseType(typeof(SupplierData), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get([FromRoute] int supplierId, CancellationToken cancellationToken)
-    {
-        return Ok(await _supplierService.Get(supplierId, cancellationToken));
-    }
+        => OkOrBadRequest(await _supplierService.Get(supplierId, cancellationToken));
+
+
+    /// <summary>
+    /// Adds a new supplier 
+    /// </summary>
+    /// <param name="supplierData">Supplier data</param>
+    /// <param name="cancellationToken">Сancellation token</param>
+    /// <returns></returns>
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Add([FromBody] SupplierData supplierData, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Add(supplierData, cancellationToken));
+
+
+    /// <summary>
+    /// Modifies an existing supplier
+    /// </summary>
+    /// <param name="supplierData">New data for the supplier</param>
+    /// <param name="cancellationToken">Сancellation token</param>
+    /// <param name="supplierId">Supplier id</param>
+    [HttpPut("{supplierId:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Modify([FromRoute] int supplierId, [FromBody] SupplierData supplierData, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Modify(supplierId, supplierData, cancellationToken));
+
+
+    /// <summary>
+    /// Deletes a supplier
+    /// </summary>
+    /// <param name="supplierId">Supplier id</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    [HttpDelete("{supplierId:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Delete([FromRoute] int supplierId, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Delete(supplierId, cancellationToken));
 
 
     private readonly ISupplierService _supplierService;
