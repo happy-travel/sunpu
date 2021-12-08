@@ -52,7 +52,7 @@ public class SupplierService : ISupplierService
             _sunpuContext.Suppliers.Add(new Supplier
             {
                 Name = supplierData.Name,
-                IsEnable = supplierData.IsEnable,
+                IsEnabled = supplierData.IsEnabled,
                 ConnectorUrl = supplierData.ConnectorUrl,
                 WebSite = supplierData.WebSite,
                 Description = supplierData.Description,
@@ -117,7 +117,7 @@ public class SupplierService : ISupplierService
 
         async Task<Result> Activate(Supplier supplier)
         {
-            supplier.IsEnable = true;
+            supplier.IsEnabled = true;
             // TODO: Saving the reason for activation in the history will be added in task AA-944
 
             _sunpuContext.Suppliers.Update(supplier);
@@ -136,7 +136,7 @@ public class SupplierService : ISupplierService
 
         async Task<Result> Deactivate(Supplier supplier)
         {
-            supplier.IsEnable = false;
+            supplier.IsEnabled = false;
             // TODO: Saving the reason for deactivation in the history will be added in task AA-944
 
             _sunpuContext.Suppliers.Update(supplier);

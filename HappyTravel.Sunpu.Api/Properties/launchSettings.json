@@ -4,7 +4,8 @@
     "Sunpu": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Local"
+        "ASPNETCORE_ENVIRONMENT": "Local",
+        "HTDC_SUNPU_SENTRY_ENDPOINT": "https:/2a7a6a65b66749eea74b9c155c22b972@sentry1.happytravel.com/51"
       },
       "applicationUrl": "http://localhost:5990"
     }

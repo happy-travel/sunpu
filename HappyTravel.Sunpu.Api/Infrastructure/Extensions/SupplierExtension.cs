@@ -11,7 +11,7 @@ public static class SupplierExtension
         {
             Id = supplier.Id,
             Name = supplier.Name,
-            IsEnable = supplier.IsEnable,
+            IsEnabled = supplier.IsEnabled,
             ConnectorUrl = supplier.ConnectorUrl
         };
     }
@@ -23,7 +23,7 @@ public static class SupplierExtension
         {
             Id = supplier.Id,
             Name = supplier.Name,
-            IsEnable = supplier.IsEnable,
+            IsEnabled = supplier.IsEnabled,
             ConnectorUrl = supplier.ConnectorUrl,
             WebSite = supplier.WebSite,
             Description = supplier.Description,

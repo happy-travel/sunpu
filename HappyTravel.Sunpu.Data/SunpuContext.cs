@@ -16,7 +16,7 @@ public class SunpuContext : DbContext
             e.ToTable("Suppliers");
             e.HasKey(s => s.Id);
             e.Property(s => s.Name).IsRequired();
-            e.Property(s => s.IsEnable).IsRequired();
+            e.Property(s => s.IsEnabled).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();
             e.Property(s => s.WebSite);
             e.Property(s => s.PrimaryContact).HasColumnType("jsonb");

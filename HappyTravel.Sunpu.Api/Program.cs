@@ -1,4 +1,5 @@
 using HappyTravel.ErrorHandling.Extensions;
+using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 using HappyTravel.Sunpu.Api.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

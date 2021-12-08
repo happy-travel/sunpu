@@ -4,7 +4,7 @@ public class Supplier
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public bool IsEnable { get; set; } = false;
+    public bool IsEnabled { get; set; }
     public string ConnectorUrl { get; set; } = string.Empty;
     public string? WebSite { get; set; }
     public string? Description { get; set; }
