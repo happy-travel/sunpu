@@ -118,6 +118,7 @@ public class SupplierService : ISupplierService
         async Task<Result> Activate(Supplier supplier)
         {
             supplier.IsEnable = true;
+            // TODO: Saving the reason for activation in the history will be added in task AA-944
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -136,6 +137,7 @@ public class SupplierService : ISupplierService
         async Task<Result> Deactivate(Supplier supplier)
         {
             supplier.IsEnable = false;
+            // TODO: Saving the reason for deactivation in the history will be added in task AA-944
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);
