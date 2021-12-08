@@ -19,9 +19,9 @@ public class SunpuContext : DbContext
             e.Property(s => s.IsEnable).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();
             e.Property(s => s.WebSite);
-            e.Property(s => s.PrimaryContact).HasColumnType("");
-            e.Property(s => s.SupportContacts).HasColumnType("");
-            e.Property(s => s.ReservationsContacts).HasColumnType("");
+            e.Property(s => s.PrimaryContact).HasColumnType("jsonb");
+            e.Property(s => s.SupportContacts).HasColumnType("jsonb");
+            e.Property(s => s.ReservationsContacts).HasColumnType("jsonb");
             e.Property(s => s.Created).IsRequired();
             e.Property(s => s.Modified);
         });
