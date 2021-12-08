@@ -10,4 +10,6 @@ public interface ISupplierService
     Task<Result> Add(SupplierData supplierData, CancellationToken cancellationToken);
     Task<Result> Modify(int supplierId, SupplierData supplierData, CancellationToken cancellationToken);
     Task<Result> Delete(int supplierId, CancellationToken cancellationToken);
+    Task<Result> Activate(int supplierId, string reason, CancellationToken cancellationToken);
+    Task<Result> Deactivate(int supplierId, string reason, CancellationToken cancellationToken);
 }

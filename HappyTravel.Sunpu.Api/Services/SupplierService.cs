@@ -109,6 +109,42 @@ public class SupplierService : ISupplierService
     }
 
 
+    public Task<Result> Activate(int supplierId, string reason, CancellationToken cancellationToken)
+    {
+        return GetSupplier(supplierId, cancellationToken)
+            .Bind(Activate);
+
+
+        async Task<Result> Activate(Supplier supplier)
+        {
+            supplier.IsEnable = true;
+
+            _sunpuContext.Suppliers.Update(supplier);
+            await _sunpuContext.SaveChangesAsync(cancellationToken);
+
+            return Result.Success();
+        }
+    }
+
+
+    public Task<Result> Deactivate(int supplierId, string reason, CancellationToken cancellationToken)
+    {
+        return GetSupplier(supplierId, cancellationToken)
+            .Bind(Deactivate);
+
+
+        async Task<Result> Deactivate(Supplier supplier)
+        {
+            supplier.IsEnable = false;
+
+            _sunpuContext.Suppliers.Update(supplier);
+            await _sunpuContext.SaveChangesAsync(cancellationToken);
+
+            return Result.Success();
+        }
+    }
+
+
     private static Result Validate(SupplierData supplierData)
         => GenericValidator<SupplierData>.Validate(v =>
             {

@@ -32,7 +32,7 @@ public class SupplierController : BaseController
     /// </summary>
     /// <param name="supplierId">Supplier id</param>
     /// <param name="cancellationToken">Сancellation token</param>
-    /// <returns></returns>
+    /// <returns>The supplier data</returns>
     [HttpGet("{supplierId:int}")]
     [ProducesResponseType(typeof(SupplierData), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -45,7 +45,6 @@ public class SupplierController : BaseController
     /// </summary>
     /// <param name="supplierData">Supplier data</param>
     /// <param name="cancellationToken">Сancellation token</param>
-    /// <returns></returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -76,6 +75,32 @@ public class SupplierController : BaseController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Delete([FromRoute] int supplierId, CancellationToken cancellationToken)
         => NoContentOrBadRequest(await _supplierService.Delete(supplierId, cancellationToken));
+
+
+    /// <summary>
+    ///  Activates specified supplier
+    /// </summary>
+    /// <param name="supplierId">Id of the supplier</param>
+    /// <param name="reason">Reason for activating the supplier</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    [HttpPost("{supplierId}/activate")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Activate([FromRoute] int supplierId, [FromQuery] string reason, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Activate(supplierId, reason, cancellationToken));
+
+
+    /// <summary>
+    ///  Deactivates specified supplier
+    /// </summary>
+    /// <param name="supplierId">Id of the supplier</param>
+    /// <param name="reason">Reason for activating the supplier</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    [HttpPost("{supplierId}/deactivate")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Deactivate([FromRoute] int supplierId, [FromQuery] string reason, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Deactivate(supplierId, reason, cancellationToken));
 
 
     private readonly ISupplierService _supplierService;
