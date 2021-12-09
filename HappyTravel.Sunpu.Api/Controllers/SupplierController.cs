@@ -34,7 +34,7 @@ public class SupplierController : BaseController
     /// <param name="cancellationToken">Сancellation token</param>
     /// <returns>The supplier data</returns>
     [HttpGet("{supplierId:int}")]
-    [ProducesResponseType(typeof(SupplierData), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(RichSupplier), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get([FromRoute] int supplierId, CancellationToken cancellationToken)
         => OkOrBadRequest(await _supplierService.Get(supplierId, cancellationToken));
@@ -43,26 +43,26 @@ public class SupplierController : BaseController
     /// <summary>
     /// Adds a new supplier 
     /// </summary>
-    /// <param name="supplierData">Supplier data</param>
+    /// <param name="richSupplier">Supplier data</param>
     /// <param name="cancellationToken">Сancellation token</param>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Add([FromBody] SupplierData supplierData, CancellationToken cancellationToken)
-        => NoContentOrBadRequest(await _supplierService.Add(supplierData, cancellationToken));
+    public async Task<IActionResult> Add([FromBody] RichSupplier richSupplier, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Add(richSupplier, cancellationToken));
 
 
     /// <summary>
     /// Modifies an existing supplier
     /// </summary>
-    /// <param name="supplierData">New data for the supplier</param>
+    /// <param name="richSupplier">New data for the supplier</param>
     /// <param name="cancellationToken">Сancellation token</param>
     /// <param name="supplierId">Supplier id</param>
     [HttpPut("{supplierId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Modify([FromRoute] int supplierId, [FromBody] SupplierData supplierData, CancellationToken cancellationToken)
-        => NoContentOrBadRequest(await _supplierService.Modify(supplierId, supplierData, cancellationToken));
+    public async Task<IActionResult> Modify([FromRoute] int supplierId, [FromBody] RichSupplier richSupplier, CancellationToken cancellationToken)
+        => NoContentOrBadRequest(await _supplierService.Modify(supplierId, richSupplier, cancellationToken));
 
 
     /// <summary>

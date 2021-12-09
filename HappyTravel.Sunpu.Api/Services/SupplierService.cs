@@ -26,39 +26,39 @@ public class SupplierService : ISupplierService
     }
 
 
-    public async Task<Result<SupplierData>> Get(int supplierId, CancellationToken cancellationToken)
+    public async Task<Result<RichSupplier>> Get(int supplierId, CancellationToken cancellationToken)
     {
         var supplier = await _sunpuContext.Suppliers.SingleOrDefaultAsync(s => s.Id == supplierId, cancellationToken);
 
         return supplier is null
-            ? Result.Failure<SupplierData>($"The supplier with id {supplierId} is not found")
-            : supplier.ToSupplierData();
+            ? Result.Failure<RichSupplier>($"The supplier with id {supplierId} is not found")
+            : supplier.ToRichSupplier();
     }
 
 
-    public Task<Result> Add(SupplierData supplierData, CancellationToken cancellationToken)
+    public Task<Result> Add(RichSupplier richSupplier, CancellationToken cancellationToken)
     {
-        return Validate(supplierData)
+        return Validate(richSupplier)
             .Ensure(IsUnique, "A supplier with the same name already exists")
             .Tap(Add);
 
 
         async Task<bool> IsUnique()
-            => !await _sunpuContext.Suppliers.AnyAsync(r => r.Name.ToLower() == supplierData.Name.ToLower(), cancellationToken);
+            => !await _sunpuContext.Suppliers.AnyAsync(r => r.Name.ToLower() == richSupplier.Name.ToLower(), cancellationToken);
 
 
         Task Add()
         {
             _sunpuContext.Suppliers.Add(new Supplier
             {
-                Name = supplierData.Name,
-                IsEnabled = supplierData.IsEnabled,
-                ConnectorUrl = supplierData.ConnectorUrl,
-                WebSite = supplierData.WebSite,
-                Description = supplierData.Description,
-                PrimaryContact = supplierData.PrimaryContact,
-                SupportContacts = supplierData.SupportContacts,
-                ReservationsContacts = supplierData.ReservationsContacts,
+                Name = richSupplier.Name,
+                IsEnabled = richSupplier.IsEnabled,
+                ConnectorUrl = richSupplier.ConnectorUrl,
+                WebSite = richSupplier.WebSite,
+                Description = richSupplier.Description,
+                PrimaryContact = richSupplier.PrimaryContact,
+                SupportContacts = richSupplier.SupportContacts,
+                ReservationsContacts = richSupplier.ReservationsContacts,
                 Created = DateTime.Now
             });
 
@@ -67,22 +67,22 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Modify(int supplierId, SupplierData supplierData, CancellationToken cancellationToken)
+    public Task<Result> Modify(int supplierId, RichSupplier richSupplier, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierId, cancellationToken)
-            .Check(supplier => Validate(supplierData))
+            .Check(supplier => Validate(richSupplier))
             .Bind(Update);
 
 
         async Task<Result> Update(Supplier supplier)
         {
-            supplier.Name = supplierData.Name;
-            supplier.ConnectorUrl = supplierData.ConnectorUrl;
-            supplier.WebSite = supplierData.WebSite;
-            supplier.Description = supplierData.Description;
-            supplier.PrimaryContact = supplierData.PrimaryContact;
-            supplier.SupportContacts = supplierData.SupportContacts;
-            supplier.ReservationsContacts = supplierData.ReservationsContacts;
+            supplier.Name = richSupplier.Name;
+            supplier.ConnectorUrl = richSupplier.ConnectorUrl;
+            supplier.WebSite = richSupplier.WebSite;
+            supplier.Description = richSupplier.Description;
+            supplier.PrimaryContact = richSupplier.PrimaryContact;
+            supplier.SupportContacts = richSupplier.SupportContacts;
+            supplier.ReservationsContacts = richSupplier.ReservationsContacts;
             supplier.Modified = DateTime.Now;
 
             _sunpuContext.Suppliers.Update(supplier);
@@ -147,13 +147,13 @@ public class SupplierService : ISupplierService
     }
 
 
-    private static Result Validate(SupplierData supplierData)
-        => GenericValidator<SupplierData>.Validate(v =>
+    private static Result Validate(RichSupplier richSupplier)
+        => GenericValidator<RichSupplier>.Validate(v =>
             {
                 v.RuleFor(r => r.Name).NotEmpty();
                 v.RuleFor(r => r.ConnectorUrl).NotEmpty();
             },
-            supplierData);
+            richSupplier);
 
 
     private async Task<Result<Supplier>> GetSupplier(int supplierId, CancellationToken cancellationToken)

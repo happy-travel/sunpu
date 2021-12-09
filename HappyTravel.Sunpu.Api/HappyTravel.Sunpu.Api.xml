@@ -19,18 +19,18 @@
             <param name="cancellationToken">Сancellation token</param>
             <returns>The supplier data</returns>
         </member>
-        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Add(HappyTravel.Sunpu.Api.Models.SupplierData,System.Threading.CancellationToken)">
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Add(HappyTravel.Sunpu.Api.Models.RichSupplier,System.Threading.CancellationToken)">
             <summary>
             Adds a new supplier 
             </summary>
-            <param name="supplierData">Supplier data</param>
+            <param name="richSupplier">Supplier data</param>
             <param name="cancellationToken">Сancellation token</param>
         </member>
-        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Modify(System.Int32,HappyTravel.Sunpu.Api.Models.SupplierData,System.Threading.CancellationToken)">
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Modify(System.Int32,HappyTravel.Sunpu.Api.Models.RichSupplier,System.Threading.CancellationToken)">
             <summary>
             Modifies an existing supplier
             </summary>
-            <param name="supplierData">New data for the supplier</param>
+            <param name="richSupplier">New data for the supplier</param>
             <param name="cancellationToken">Сancellation token</param>
             <param name="supplierId">Supplier id</param>
         </member>

@@ -2,7 +2,7 @@
 
 namespace HappyTravel.Sunpu.Api.Models
 {
-    public class SupplierData
+    public class RichSupplier
     {
         public int Id { get; init; }
         public string Name { get; init; } = string.Empty;

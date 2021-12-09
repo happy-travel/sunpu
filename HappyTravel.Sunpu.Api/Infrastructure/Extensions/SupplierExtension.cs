@@ -17,9 +17,9 @@ public static class SupplierExtension
     }
 
 
-    public static SupplierData ToSupplierData(this Supplier supplier)
+    public static RichSupplier ToRichSupplier(this Supplier supplier)
     {
-        return new SupplierData
+        return new RichSupplier
         {
             Id = supplier.Id,
             Name = supplier.Name,
