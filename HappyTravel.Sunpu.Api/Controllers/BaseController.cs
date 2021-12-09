@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSharpFunctionalExtensions;
+using HappyTravel.Sunpu.Api.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Net;
 
@@ -6,12 +8,22 @@ namespace HappyTravel.Sunpu.Api.Controllers;
 
 public class BaseController : ControllerBase
 {
-    protected static string LanguageCode => CultureInfo.CurrentCulture.Name;
+    protected IActionResult NoContentOrBadRequest(Result model)
+    {
+        var (_, isFailure, error) = model;
+        if (isFailure)
+            return BadRequest(ProblemDetailsBuilder.Build(error));
 
-    protected IActionResult BadRequestWithProblemDetails(string details)
-        => BadRequest(new ProblemDetails
-        {
-            Detail = details,
-            Status = (int)HttpStatusCode.BadRequest
-        });
+        return NoContent();
+    }
+
+
+    protected IActionResult OkOrBadRequest<T>(Result<T> model)
+    {
+        var (_, isFailure, response, error) = model;
+        if (isFailure)
+            return BadRequest(ProblemDetailsBuilder.Build(error));
+
+        return Ok(response);
+    }
 }

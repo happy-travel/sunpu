@@ -14,8 +14,16 @@ public class SunpuContext : DbContext
         builder.Entity<Supplier>(e =>
         {
             e.ToTable("Suppliers");
-            e.HasKey(c => c.Id);
-            e.Property(c => c.Name).IsRequired();
+            e.HasKey(s => s.Id);
+            e.Property(s => s.Name).IsRequired();
+            e.Property(s => s.IsEnabled).IsRequired();
+            e.Property(s => s.ConnectorUrl).IsRequired();
+            e.Property(s => s.WebSite);
+            e.Property(s => s.PrimaryContact).HasColumnType("jsonb");
+            e.Property(s => s.SupportContacts).HasColumnType("jsonb");
+            e.Property(s => s.ReservationsContacts).HasColumnType("jsonb");
+            e.Property(s => s.Created).IsRequired();
+            e.Property(s => s.Modified);
         });
     }
 

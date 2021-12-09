@@ -8,8 +8,54 @@
             <summary>
             Gets a list of suppliers
             </summary>
-            <param name="cancellationToken"></param>
-            <returns>List of suppliers</returns>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>List of slim suppliers</returns>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Get(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gets a supplier by id
+            </summary>
+            <param name="supplierId">Supplier id</param>
+            <param name="cancellationToken">Сancellation token</param>
+            <returns>The supplier data</returns>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Add(HappyTravel.Sunpu.Api.Models.RichSupplier,System.Threading.CancellationToken)">
+            <summary>
+            Adds a new supplier 
+            </summary>
+            <param name="richSupplier">Supplier data</param>
+            <param name="cancellationToken">Сancellation token</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Modify(System.Int32,HappyTravel.Sunpu.Api.Models.RichSupplier,System.Threading.CancellationToken)">
+            <summary>
+            Modifies an existing supplier
+            </summary>
+            <param name="richSupplier">New data for the supplier</param>
+            <param name="cancellationToken">Сancellation token</param>
+            <param name="supplierId">Supplier id</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a supplier
+            </summary>
+            <param name="supplierId">Supplier id</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Activate(System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+             Activates specified supplier
+            </summary>
+            <param name="supplierId">Id of the supplier</param>
+            <param name="reason">Reason for activating the supplier</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Deactivate(System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+             Deactivates specified supplier
+            </summary>
+            <param name="supplierId">Id of the supplier</param>
+            <param name="reason">Reason for activating the supplier</param>
+            <param name="cancellationToken">Cancellation token</param>
         </member>
     </members>
 </doc>
