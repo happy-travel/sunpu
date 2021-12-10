@@ -1,4 +1,5 @@
 ﻿using FloxDc.CacheFlow;
+using HappyTravel.Sunpu.Data.Models;
 
 namespace HappyTravel.Sunpu.Api.Services;
 
@@ -10,21 +11,20 @@ public class SupplierStorage : ISupplierStorage
     }
 
 
-    public void Add(string token)
-        => _flow.Set(TokenKey, token, s_tokenLifeTime);
+    public void Add(Supplier supplier)
+        => _flow.Set(supplier.Id.ToString(), supplier, s_supplierLifeTime);
 
 
-    public string TryGet()
+    public Supplier? TryGet(int supplierId)
     {
-        if (_flow.TryGetValue(TokenKey, out string token))
-            return token;
+        if (_flow.TryGetValue(supplierId.ToString(), out Supplier supplier))
+            return supplier;
 
-        return string.Empty;
+        return null;
     }
 
 
-    private const string TokenKey = "Token";
-    private static readonly TimeSpan s_tokenLifeTime = TimeSpan.FromHours(24);
+    private static readonly TimeSpan s_supplierLifeTime = TimeSpan.FromHours(24);
 
     private readonly IMemoryFlow _flow;
 }

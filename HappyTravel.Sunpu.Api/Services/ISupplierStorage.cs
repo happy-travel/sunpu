@@ -5,5 +5,5 @@ namespace HappyTravel.Sunpu.Api.Services;
 public interface ISupplierStorage
 {
     void Add(Supplier supplier);
-    Supplier TryGet();
+    Supplier? TryGet(int supplierId);
 }
