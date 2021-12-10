@@ -2,6 +2,7 @@
 using FluentValidation;
 using HappyTravel.Sunpu.Api.Infrastructure;
 using HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+using HappyTravel.Sunpu.Api.Infrastructure.FunctionalExtensions;
 using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Data;
 using HappyTravel.Sunpu.Data.Models;
@@ -59,7 +60,7 @@ public class SupplierService : ISupplierService
                 PrimaryContact = richSupplier.PrimaryContact,
                 SupportContacts = richSupplier.SupportContacts,
                 ReservationsContacts = richSupplier.ReservationsContacts,
-                Created = DateTime.Now
+                Created = DateTime.UtcNow
             });
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -83,7 +84,7 @@ public class SupplierService : ISupplierService
             supplier.PrimaryContact = richSupplier.PrimaryContact;
             supplier.SupportContacts = richSupplier.SupportContacts;
             supplier.ReservationsContacts = richSupplier.ReservationsContacts;
-            supplier.Modified = DateTime.Now;
+            supplier.Modified = DateTime.UtcNow;
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -112,15 +113,32 @@ public class SupplierService : ISupplierService
     public Task<Result> Activate(int supplierId, string reason, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierId, cancellationToken)
-            .Bind(Activate);
+            .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
+                .Tap(Activate)
+                .Bind(SaveToHistory));
 
 
-        async Task<Result> Activate(Supplier supplier)
+        Task Activate(Supplier supplier)
         {
             supplier.IsEnabled = true;
-            // TODO: Saving the reason for activation in the history will be added in task AA-944
-
             _sunpuContext.Suppliers.Update(supplier);
+
+            return _sunpuContext.SaveChangesAsync(cancellationToken);
+        }
+
+
+        async Task<Result> SaveToHistory(Supplier supplier)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+                return Result.Failure("The reason for activation is not specified");
+
+            _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
+            {
+                SupplierId = supplier.Id,
+                IsEnabled = true,
+                Reason = reason,
+                Created = DateTime.UtcNow
+            });
             await _sunpuContext.SaveChangesAsync(cancellationToken);
 
             return Result.Success();
@@ -131,15 +149,32 @@ public class SupplierService : ISupplierService
     public Task<Result> Deactivate(int supplierId, string reason, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierId, cancellationToken)
-            .Bind(Deactivate);
+            .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
+                .Tap(Deactivate)
+                .Bind(SaveToHistory));
 
 
-        async Task<Result> Deactivate(Supplier supplier)
+        Task Deactivate(Supplier supplier)
         {
             supplier.IsEnabled = false;
-            // TODO: Saving the reason for deactivation in the history will be added in task AA-944
-
             _sunpuContext.Suppliers.Update(supplier);
+
+            return _sunpuContext.SaveChangesAsync(cancellationToken);
+        }
+
+
+        async Task<Result> SaveToHistory(Supplier supplier)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+                return Result.Failure("The reason for deactivation is not specified");
+
+            _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
+            {
+                SupplierId = supplier.Id,
+                IsEnabled = false,
+                Reason = reason,
+                Created = DateTime.UtcNow
+            });
             await _sunpuContext.SaveChangesAsync(cancellationToken);
 
             return Result.Success();
