@@ -8,6 +8,7 @@ builder.ConfigureLogging();
 builder.ConfigureSentry();
 builder.ConfigureServiceProvider();
 builder.ConfigureServices();
+builder.ConfigureDatabaseOptions();
 
 var app = builder.Build();
 
