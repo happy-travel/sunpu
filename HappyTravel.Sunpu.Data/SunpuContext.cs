@@ -25,6 +25,16 @@ public class SunpuContext : DbContext
             e.Property(s => s.Created).IsRequired();
             e.Property(s => s.Modified);
         });
+
+        builder.Entity<SupplierActivationHistoryEntry>(e =>
+        {
+            e.ToTable("SupplierActivationHistory");
+            e.HasKey(h => h.Id);
+            e.Property(h => h.SupplierId).IsRequired();
+            e.Property(h => h.IsEnabled).IsRequired();
+            e.Property(h => h.Reason).IsRequired();
+            e.Property(h => h.Created).IsRequired();
+        });
     }
 
 
