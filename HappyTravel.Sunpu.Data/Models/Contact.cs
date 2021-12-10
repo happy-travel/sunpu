@@ -1,10 +1,9 @@
-﻿namespace HappyTravel.Sunpu.Data.Models
+﻿namespace HappyTravel.Sunpu.Data.Models;
+
+public class Contact
 {
-    public  class Contact
-    {
-        public string FullName { get; set; } = string.Empty;
-        public string? Email { get; set; }
-        public string? Phone { get; set; }
-        public string? Description { get; set; }
-    }
+    public string FullName { get; set; } = string.Empty;
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Description { get; set; }
 }
