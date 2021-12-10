@@ -4,7 +4,7 @@ name: Test
 
 trigger:
   branch:
-    - master
+    - main
   event:
     include:
       - pull_request
@@ -46,7 +46,7 @@ name: Build
 
 trigger:
   branch:
-    - master
+    - main
   event:
     include:
       - push
