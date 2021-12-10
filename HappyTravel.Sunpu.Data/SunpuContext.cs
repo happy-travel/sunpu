@@ -38,6 +38,6 @@ public class SunpuContext : DbContext
     }
 
 
-    public DbSet<Supplier> Suppliers { get; set; }
-    public DbSet<SupplierActivationHistoryEntry> SupplierActivationHistory { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; } = null!;
+    public DbSet<SupplierActivationHistoryEntry> SupplierActivationHistory { get; set; } = null!;
 }
