@@ -41,5 +41,7 @@
 		<NoWarn>1701;1702;1591</NoWarn>
 		<DocumentationFile>..\HappyTravel.Sunpu.Api\HappyTravel.Sunpu.Api.xml</DocumentationFile>
 	</PropertyGroup>
-	
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
 </Project>
