@@ -26,7 +26,7 @@ public class SupplierStorage : ISupplierStorage
     public async Task<Supplier?> Get(int supplierId, CancellationToken cancellationToken)
     {
         if (_flow.TryGetValue(SuppliersKey, out List<Supplier> suppliers))
-            return suppliers.Single(s => s.Id == supplierId);
+            return suppliers.SingleOrDefault(s => s.Id == supplierId);
 
         suppliers = await LoadFromDatabase(cancellationToken);
 
