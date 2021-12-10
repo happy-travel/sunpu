@@ -1,8 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using HappyTravel.Sunpu.Api.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
-using System.Net;
 
 namespace HappyTravel.Sunpu.Api.Controllers;
 

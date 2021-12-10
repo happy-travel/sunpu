@@ -12,15 +12,16 @@ namespace HappyTravel.Sunpu.Api.Services;
 
 public class SupplierService : ISupplierService
 {
-    public SupplierService(SunpuContext sunpuContext)
+    public SupplierService(SunpuContext sunpuContext, ISupplierStorage supplierStorage)
     {
         _sunpuContext = sunpuContext;
+        _supplierStorage = supplierStorage;
     }
 
 
     public async Task<List<SlimSupplier>> Get(CancellationToken cancellationToken)
     {
-        var suppliers = await _sunpuContext.Suppliers.ToListAsync(cancellationToken: cancellationToken);
+        var suppliers = await _supplierStorage.Get(cancellationToken);
 
         return suppliers.Select(s => s.ToSlimSupplier())
             .ToList();
@@ -29,7 +30,7 @@ public class SupplierService : ISupplierService
 
     public async Task<Result<RichSupplier>> Get(int supplierId, CancellationToken cancellationToken)
     {
-        var supplier = await _sunpuContext.Suppliers.SingleOrDefaultAsync(s => s.Id == supplierId, cancellationToken);
+        var supplier = await _supplierStorage.Get(supplierId, cancellationToken);
 
         return supplier is null
             ? Result.Failure<RichSupplier>($"The supplier with id {supplierId} is not found")
@@ -41,7 +42,8 @@ public class SupplierService : ISupplierService
     {
         return Validate(richSupplier)
             .Ensure(IsUnique, "A supplier with the same name already exists")
-            .Tap(Add);
+            .Tap(Add)
+            .Tap(RefreshStorage);
 
 
         async Task<bool> IsUnique()
@@ -65,6 +67,10 @@ public class SupplierService : ISupplierService
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
         }
+
+
+        Task RefreshStorage()
+            => _supplierStorage.Refresh(cancellationToken);
     }
 
 
@@ -72,7 +78,8 @@ public class SupplierService : ISupplierService
     {
         return GetSupplier(supplierId, cancellationToken)
             .Check(supplier => Validate(richSupplier))
-            .Bind(Update);
+            .Bind(Update)
+            .Tap(RefreshStorage);
 
 
         async Task<Result> Update(Supplier supplier)
@@ -91,13 +98,18 @@ public class SupplierService : ISupplierService
 
             return Result.Success();
         }
+
+
+        Task RefreshStorage()
+            => _supplierStorage.Refresh(cancellationToken);
     }
 
 
     public Task<Result> Delete(int supplierId, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierId, cancellationToken)
-            .Bind(Delete);
+            .Bind(Delete)
+            .Tap(RefreshStorage);
 
 
         async Task<Result> Delete(Supplier supplier)
@@ -107,6 +119,10 @@ public class SupplierService : ISupplierService
 
             return Result.Success();
         }
+
+
+        Task RefreshStorage()
+            => _supplierStorage.Refresh(cancellationToken);
     }
 
 
@@ -115,7 +131,8 @@ public class SupplierService : ISupplierService
         return GetSupplier(supplierId, cancellationToken)
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(Activate)
-                .Bind(SaveToHistory));
+                .Bind(SaveToHistory))
+            .Tap(RefreshStorage);
 
 
         Task Activate(Supplier supplier)
@@ -143,6 +160,10 @@ public class SupplierService : ISupplierService
 
             return Result.Success();
         }
+
+
+        Task RefreshStorage()
+            => _supplierStorage.Refresh(cancellationToken);
     }
 
 
@@ -151,7 +172,8 @@ public class SupplierService : ISupplierService
         return GetSupplier(supplierId, cancellationToken)
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(Deactivate)
-                .Bind(SaveToHistory));
+                .Bind(SaveToHistory))
+            .Tap(RefreshStorage);
 
 
         Task Deactivate(Supplier supplier)
@@ -179,6 +201,10 @@ public class SupplierService : ISupplierService
 
             return Result.Success();
         }
+
+
+        Task RefreshStorage()
+            => _supplierStorage.Refresh(cancellationToken);
     }
 
 
@@ -202,4 +228,5 @@ public class SupplierService : ISupplierService
 
 
     private readonly SunpuContext _sunpuContext;
+    private readonly ISupplierStorage _supplierStorage;
 }

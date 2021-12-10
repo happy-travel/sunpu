@@ -4,6 +4,7 @@ namespace HappyTravel.Sunpu.Api.Services;
 
 public interface ISupplierStorage
 {
-    void Add(Supplier supplier);
-    Supplier? TryGet(int supplierId);
+    Task<List<Supplier>> Get(CancellationToken cancellationToken);
+    Task<Supplier?> Get(int supplierId, CancellationToken cancellationToken);
+    Task Refresh(CancellationToken cancellationToken);
 }
