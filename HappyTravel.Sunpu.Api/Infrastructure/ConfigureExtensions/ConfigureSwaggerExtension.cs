@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.OpenApi.Models;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureSwaggerExtension
 {

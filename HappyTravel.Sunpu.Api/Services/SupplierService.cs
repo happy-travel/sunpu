@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using FluentValidation;
 using HappyTravel.Sunpu.Api.Infrastructure;
-using HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+using HappyTravel.Sunpu.Api.Infrastructure.ModelExtensions;
 using HappyTravel.Sunpu.Api.Infrastructure.FunctionalExtensions;
 using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Data;

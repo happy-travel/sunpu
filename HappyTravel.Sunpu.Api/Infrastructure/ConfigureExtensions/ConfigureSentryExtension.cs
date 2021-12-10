@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureSentryExtension
 {

@@ -2,7 +2,7 @@
 using HappyTravel.StdOutLogger.Infrastructure;
 using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureLoggingExtension
 {

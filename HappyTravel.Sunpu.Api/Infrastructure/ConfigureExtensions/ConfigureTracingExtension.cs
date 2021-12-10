@@ -1,7 +1,7 @@
 ﻿using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 using HappyTravel.Telemetry.Extensions;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureTracingExtension
 {

@@ -2,7 +2,7 @@
 using HappyTravel.ErrorHandling.Extensions;
 using HappyTravel.Sunpu.Api.Services;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureServicesExtension
 {
