@@ -129,7 +129,7 @@ public class SupplierService : ISupplierService
 
         async Task<Result> SaveToHistory(Supplier supplier)
         {
-            if (reason == string.Empty)
+            if (string.IsNullOrWhiteSpace(reason))
                 return Result.Failure("The reason for activation is not specified");
 
             _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
@@ -165,7 +165,7 @@ public class SupplierService : ISupplierService
 
         async Task<Result> SaveToHistory(Supplier supplier)
         {
-            if (reason == string.Empty)
+            if (string.IsNullOrWhiteSpace(reason))
                 return Result.Failure("The reason for deactivation is not specified");
 
             _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
