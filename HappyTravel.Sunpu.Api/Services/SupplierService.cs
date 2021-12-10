@@ -60,7 +60,7 @@ public class SupplierService : ISupplierService
                 PrimaryContact = richSupplier.PrimaryContact,
                 SupportContacts = richSupplier.SupportContacts,
                 ReservationsContacts = richSupplier.ReservationsContacts,
-                Created = DateTime.Now
+                Created = DateTime.UtcNow
             });
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -84,7 +84,7 @@ public class SupplierService : ISupplierService
             supplier.PrimaryContact = richSupplier.PrimaryContact;
             supplier.SupportContacts = richSupplier.SupportContacts;
             supplier.ReservationsContacts = richSupplier.ReservationsContacts;
-            supplier.Modified = DateTime.Now;
+            supplier.Modified = DateTime.UtcNow;
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -137,7 +137,7 @@ public class SupplierService : ISupplierService
                 SupplierId = supplier.Id,
                 IsEnabled = true,
                 Reason = reason,
-                Created = DateTime.Now
+                Created = DateTime.UtcNow
             });
             await _sunpuContext.SaveChangesAsync(cancellationToken);
 
@@ -173,7 +173,7 @@ public class SupplierService : ISupplierService
                 SupplierId = supplier.Id,
                 IsEnabled = false,
                 Reason = reason,
-                Created = DateTime.Now
+                Created = DateTime.UtcNow
             });
             await _sunpuContext.SaveChangesAsync(cancellationToken);
 
