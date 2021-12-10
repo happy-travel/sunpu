@@ -39,4 +39,5 @@ public class SunpuContext : DbContext
 
 
     public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<SupplierActivationHistoryEntry> SupplierActivationHistory { get; set; }
 }
