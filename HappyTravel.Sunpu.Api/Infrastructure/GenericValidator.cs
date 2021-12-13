@@ -18,9 +18,6 @@ public class GenericValidator<T> : AbstractValidator<T>
         var validationResult = base.Validate(entity);
         return validationResult.IsValid
             ? Result.Success()
-            : Result.Combine(validationResult
-                .Errors
-                .Select(e => Result.Failure(e.ErrorMessage))
-                .ToArray());
+            : Result.Failure(validationResult.ToString(";"));
     }
 }
