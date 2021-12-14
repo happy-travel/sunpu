@@ -43,7 +43,7 @@ public class SupplierStorage : ISupplierStorage
     private async Task<List<Supplier>> LoadFromDatabase(CancellationToken cancellationToken)
     {
         var suppliers = await _sunpuContext.Suppliers.ToListAsync(cancellationToken);
-        _flow.Set(SuppliersKey, suppliers, s_supplierLifeTime);
+        _flow.Set(SuppliersKey, suppliers, supplierLifeTime);
 
         return suppliers;
     }
@@ -51,7 +51,7 @@ public class SupplierStorage : ISupplierStorage
 
     private const string SuppliersKey = "Suppliers";
 
-    private static readonly TimeSpan s_supplierLifeTime = TimeSpan.FromHours(24);
+    private static readonly TimeSpan supplierLifeTime = TimeSpan.FromHours(24);
 
     private readonly IMemoryFlow _flow;
     private readonly SunpuContext _sunpuContext;
