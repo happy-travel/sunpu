@@ -16,19 +16,13 @@ public class SupplierStorage : ISupplierStorage
 
     public async Task<List<Supplier>> Get(CancellationToken cancellationToken)
     {
-        if (_flow.TryGetValue(SuppliersKey, out List<Supplier> suppliers))
-            return suppliers;
-
-        return await LoadFromDatabase(cancellationToken);
+        return await _flow.GetOrSetAsync(SuppliersKey, async () => await LoadFromDatabase(cancellationToken), supplierLifeTime, cancellationToken);
     }
 
 
     public async Task<Supplier?> Get(int supplierId, CancellationToken cancellationToken)
     {
-        if (_flow.TryGetValue(SuppliersKey, out List<Supplier> suppliers))
-            return suppliers.SingleOrDefault(s => s.Id == supplierId);
-
-        suppliers = await LoadFromDatabase(cancellationToken);
+        var suppliers = await Get(cancellationToken);
 
         return suppliers.SingleOrDefault(s => s.Id == supplierId);
     }
@@ -36,17 +30,13 @@ public class SupplierStorage : ISupplierStorage
 
     public async Task Refresh(CancellationToken cancellationToken)
     { 
-        await LoadFromDatabase(cancellationToken);
+        var suppliers = await LoadFromDatabase(cancellationToken);
+        _flow.Set(SuppliersKey, suppliers, supplierLifeTime);
     }
 
 
     private async Task<List<Supplier>> LoadFromDatabase(CancellationToken cancellationToken)
-    {
-        var suppliers = await _sunpuContext.Suppliers.ToListAsync(cancellationToken);
-        _flow.Set(SuppliersKey, suppliers, supplierLifeTime);
-
-        return suppliers;
-    }
+        => await _sunpuContext.Suppliers.ToListAsync(cancellationToken);
         
 
     private const string SuppliersKey = "Suppliers";
