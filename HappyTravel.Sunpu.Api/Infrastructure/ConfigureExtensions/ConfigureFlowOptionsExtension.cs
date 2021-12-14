@@ -1,6 +1,6 @@
 ﻿using FloxDc.CacheFlow;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureFlowOptionsExtension
 {

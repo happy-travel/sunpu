@@ -1,7 +1,7 @@
 ﻿using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Data.Models;
 
-namespace HappyTravel.Sunpu.Api.Infrastructure.Extensions;
+namespace HappyTravel.Sunpu.Api.Infrastructure.ModelExtensions;
 
 public static class SupplierExtension
 {
