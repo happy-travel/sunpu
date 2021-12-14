@@ -8,6 +8,7 @@ public class RichSupplier
     public string Name { get; init; } = string.Empty;
     public bool IsEnabled { get; init; }
     public string ConnectorUrl { get; init; } = string.Empty;
+    public bool IsMultiRoomSupported { get; init; }
     public string? WebSite { get; init; }
     public string? Description { get; init; }
     public Contact? PrimaryContact { get; init; }
