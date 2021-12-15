@@ -9,7 +9,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "IsMultiRoomSupported",
+                name: "IsMultiRoomFlowSupported",
                 table: "Suppliers",
                 type: "boolean",
                 nullable: false,
@@ -17,7 +17,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
 
             var table = "Suppliers";
             var keyColumn = "Id";
-            var column = "IsMultiRoomSupported";
+            var column = "IsMultiRoomFlowSupported";
             migrationBuilder.UpdateData(table, keyColumn, 1, column, true); // Netstorming
             migrationBuilder.UpdateData(table, keyColumn, 2, column, true); // iWTX
             migrationBuilder.UpdateData(table, keyColumn, 4, column, true); // RateHawk
@@ -35,7 +35,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsMultiRoomSupported",
+                name: "IsMultiRoomFlowSupported",
                 table: "Suppliers");
         }
     }

@@ -6,7 +6,7 @@ public class Supplier
     public string Name { get; set; } = string.Empty;
     public bool IsEnabled { get; set; }
     public string ConnectorUrl { get; set; } = string.Empty;
-    public bool IsMultiRoomSupported { get; set; }
+    public bool IsMultiRoomFlowSupported { get; set; }
     public string? WebSite { get; set; }
     public string? Description { get; set; }
     public Contact? PrimaryContact { get; set; }

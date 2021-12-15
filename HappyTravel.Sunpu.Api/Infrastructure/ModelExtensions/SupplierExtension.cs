@@ -13,7 +13,7 @@ public static class SupplierExtension
             Name = supplier.Name,
             IsEnabled = supplier.IsEnabled,
             ConnectorUrl = supplier.ConnectorUrl,
-            IsMultiRoomSupported = supplier.IsMultiRoomSupported
+            IsMultiRoomFlowSupported = supplier.IsMultiRoomFlowSupported
         };
     }
 
@@ -26,7 +26,7 @@ public static class SupplierExtension
             Name = supplier.Name,
             IsEnabled = supplier.IsEnabled,
             ConnectorUrl = supplier.ConnectorUrl,
-            IsMultiRoomSupported = supplier.IsMultiRoomSupported,
+            IsMultiRoomFlowSupported = supplier.IsMultiRoomFlowSupported,
             WebSite = supplier.WebSite,
             Description = supplier.Description,
             PrimaryContact = supplier.PrimaryContact,

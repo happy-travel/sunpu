@@ -18,7 +18,7 @@ public class SunpuContext : DbContext
             e.Property(s => s.Name).IsRequired();
             e.Property(s => s.IsEnabled).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();
-            e.Property(s => s.IsMultiRoomSupported).IsRequired();
+            e.Property(s => s.IsMultiRoomFlowSupported).IsRequired();
             e.Property(s => s.WebSite);
             e.Property(s => s.PrimaryContact).HasColumnType("jsonb");
             e.Property(s => s.SupportContacts).HasColumnType("jsonb");
