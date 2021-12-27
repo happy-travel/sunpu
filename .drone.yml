@@ -136,7 +136,7 @@ name: production
 
 trigger:
   branches:
-    - master
+    - main
   event:
     - promote
   target:
