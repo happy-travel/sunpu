@@ -1,5 +1,6 @@
 ﻿using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HappyTravel.Sunpu.Api.Controllers;
@@ -8,6 +9,7 @@ namespace HappyTravel.Sunpu.Api.Controllers;
 [ApiVersion("1.0")]
 [Route("api/{v:apiVersion}/suppliers")]
 [Produces("application/json")]
+[Authorize]
 public class SupplierController : BaseController
 {
     public SupplierController(ISupplierService supplierService)
