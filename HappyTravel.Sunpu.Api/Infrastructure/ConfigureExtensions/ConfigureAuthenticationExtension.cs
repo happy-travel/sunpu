@@ -4,13 +4,13 @@ namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureAuthenticationExtension
 {
-    public static void ConfigureAuthentication(this WebApplicationBuilder builder, string apiName, string authorityUrl)
+    public static void ConfigureAuthentication(this WebApplicationBuilder builder, Dictionary<string, string> authorityOptions)
     {
         builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
             .AddIdentityServerAuthentication(options =>
             {
-                options.Authority = authorityUrl;
-                options.ApiName = apiName;
+                options.Authority = authorityOptions["authorityUrl"];
+                options.ApiName = authorityOptions["apiName"];
                 options.RequireHttpsMetadata = true;
                 options.SupportedTokens = SupportedTokens.Jwt;
             });
