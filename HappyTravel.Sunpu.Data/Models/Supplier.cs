@@ -12,6 +12,6 @@ public class Supplier
     public Contact? PrimaryContact { get; set; }
     public List<Contact>? SupportContacts { get; set; }
     public List<Contact>? ReservationsContacts { get; set; }
-    public DateTime Created { get; set; } = DateTime.Now;
-    public DateTime? Modified { get; set; }
+    public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
+    public DateTimeOffset? Modified { get; set; }
 }
