@@ -57,6 +57,7 @@ public class SupplierService : ISupplierService
                 Name = richSupplier.Name,
                 IsEnabled = richSupplier.IsEnabled,
                 ConnectorUrl = richSupplier.ConnectorUrl,
+                ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
                 IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
                 WebSite = richSupplier.WebSite,
                 Description = richSupplier.Description,
@@ -87,6 +88,7 @@ public class SupplierService : ISupplierService
         {
             supplier.Name = richSupplier.Name;
             supplier.ConnectorUrl = richSupplier.ConnectorUrl;
+            supplier.ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint;
             supplier.IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported;
             supplier.WebSite = richSupplier.WebSite;
             supplier.Description = richSupplier.Description;
