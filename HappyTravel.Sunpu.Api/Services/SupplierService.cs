@@ -47,7 +47,7 @@ public class SupplierService : ISupplierService
 
 
         async Task<bool> IsUnique()
-            => !await _sunpuContext.Suppliers.AnyAsync(r => r.Name.ToLower() == richSupplier.Name.ToLower(), cancellationToken);
+            => !await _sunpuContext.Suppliers.AnyAsync(s => s.Name.ToLower() == richSupplier.Name.ToLower(), cancellationToken);
 
 
         Task Add()
@@ -80,8 +80,13 @@ public class SupplierService : ISupplierService
     {
         return GetSupplier(supplierId, cancellationToken)
             .Check(supplier => Validate(richSupplier))
+            .Ensure(IsUnique, "A supplier with the same name already exists")
             .Bind(Update)
             .Tap(RefreshStorage);
+        
+        
+        async Task<bool> IsUnique(Supplier supplier)
+            => !await _sunpuContext.Suppliers.AnyAsync(s => s.Name.ToLower() == richSupplier.Name.ToLower() && s.Id != supplierId, cancellationToken);
 
 
         async Task<Result> Update(Supplier supplier)
