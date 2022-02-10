@@ -58,7 +58,7 @@ ingress:
 
 resources:
   limits:
-    cpu: 200
+    cpu: 200m
     memory: 512Mi
   requests:
     cpu: 200m
@@ -84,7 +84,7 @@ env:
   ASPNETCORE_URLS: http://*:80
   ASPNETCORE_ENVIRONMENT: "Development"
   HTDC_VAULT_ENDPOINT: "https://vault.dev.happytravel.com/v1/"
-  HTDC_SUNPU_SENTRY_ENDPOINT: "https://5b342f0cc9dc41f7be37281d22b662ed@sentry1.happytravel.com/60"
+  HTDC_SUNPU_SENTRY_ENDPOINT: "https://5b342f0cc9dc41f7be37281d22b662ed@sentry.happytravel.com/60"
   JAEGER_AGENT_HOST: "localhost"
   JAEGER_AGENT_PORT: "6831"
   CONSUL_HTTP_ADDR: "https://consul-dev.happytravel.com/"
