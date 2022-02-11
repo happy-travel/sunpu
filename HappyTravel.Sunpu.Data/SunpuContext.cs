@@ -15,6 +15,7 @@ public class SunpuContext : DbContext
         {
             e.ToTable("Suppliers");
             e.HasKey(s => s.Id);
+            e.Property(s => s.Code).IsRequired();
             e.Property(s => s.Name).IsRequired();
             e.Property(s => s.IsEnabled).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();

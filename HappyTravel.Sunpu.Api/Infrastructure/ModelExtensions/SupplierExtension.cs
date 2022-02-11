@@ -10,6 +10,7 @@ public static class SupplierExtension
         return new SlimSupplier
         {
             Id = supplier.Id,
+            Code = supplier.Code,
             Name = supplier.Name,
             IsEnabled = supplier.IsEnabled,
             ConnectorUrl = supplier.ConnectorUrl,
@@ -24,6 +25,7 @@ public static class SupplierExtension
         return new RichSupplier
         {
             Id = supplier.Id,
+            Code = supplier.Code,
             Name = supplier.Name,
             IsEnabled = supplier.IsEnabled,
             ConnectorUrl = supplier.ConnectorUrl,

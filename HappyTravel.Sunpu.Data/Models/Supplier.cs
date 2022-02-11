@@ -2,7 +2,9 @@
 
 public class Supplier
 {
+    // TODO: Remove the Id when migration to the code will be finished
     public int Id { get; set; }
+    public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public bool IsEnabled { get; set; }
     public string ConnectorUrl { get; set; } = string.Empty;
