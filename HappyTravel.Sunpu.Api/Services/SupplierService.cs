@@ -32,9 +32,7 @@ public class SupplierService : ISupplierService
     {
         var supplier = await _supplierStorage.Get(supplierId, cancellationToken);
 
-        return supplier is null
-            ? Result.Failure<RichSupplier>($"The supplier with id {supplierId} is not found")
-            : supplier.ToRichSupplier();
+        return supplier?.ToRichSupplier() ?? Result.Failure<RichSupplier>($"The supplier with id {supplierId} is not found");
     }
 
 
@@ -47,7 +45,8 @@ public class SupplierService : ISupplierService
 
 
         async Task<bool> IsUnique()
-            => !await _sunpuContext.Suppliers.AnyAsync(s => s.Name.ToLower() == richSupplier.Name.ToLower(), cancellationToken);
+            => !await _sunpuContext.Suppliers.AnyAsync(s => s.Name.ToLower() == richSupplier.Name.ToLower(), cancellationToken) &&
+               !await _sunpuContext.Suppliers.AnyAsync(s => s.Code.ToLower() == richSupplier.Code.ToLower(), cancellationToken);
 
 
         Task Add()
@@ -55,6 +54,7 @@ public class SupplierService : ISupplierService
             _sunpuContext.Suppliers.Add(new Supplier
             {
                 Name = richSupplier.Name,
+                Code = richSupplier.Code,
                 IsEnabled = richSupplier.IsEnabled,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
@@ -73,13 +73,24 @@ public class SupplierService : ISupplierService
 
         Task RefreshStorage()
             => _supplierStorage.Refresh(cancellationToken);
+
+        static Result Validate(RichSupplier richSupplier)
+            => GenericValidator<RichSupplier>.Validate(v =>
+                {
+                    v.RuleFor(r => r.Name).NotEmpty();
+                    v.RuleFor(r => r.Code).NotEmpty();
+                    v.RuleFor(r => r.Code).Must(c => Char.IsLower(c.First()))
+                        .WithMessage("Supplier code must be in camel case");
+                    v.RuleFor(r => r.ConnectorUrl).NotEmpty();
+                },
+                richSupplier);
     }
 
 
     public Task<Result> Modify(int supplierId, RichSupplier richSupplier, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierId, cancellationToken)
-            .Check(supplier => Validate(richSupplier))
+            .Check(_ => Validate(richSupplier))
             .Ensure(IsUnique, "A supplier with the same name already exists")
             .Bind(Update)
             .Tap(RefreshStorage);
@@ -91,6 +102,7 @@ public class SupplierService : ISupplierService
 
         async Task<Result> Update(Supplier supplier)
         {
+            // Supplier code cannot be updated, so not getting the code from here is by design
             supplier.Name = richSupplier.Name;
             supplier.ConnectorUrl = richSupplier.ConnectorUrl;
             supplier.ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint;
@@ -111,6 +123,15 @@ public class SupplierService : ISupplierService
 
         Task RefreshStorage()
             => _supplierStorage.Refresh(cancellationToken);
+        
+        
+        static Result Validate(RichSupplier richSupplier)
+            => GenericValidator<RichSupplier>.Validate(v =>
+                {
+                    v.RuleFor(r => r.Name).NotEmpty();
+                    v.RuleFor(r => r.ConnectorUrl).NotEmpty();
+                },
+                richSupplier);
     }
 
 
@@ -215,15 +236,6 @@ public class SupplierService : ISupplierService
         Task RefreshStorage()
             => _supplierStorage.Refresh(cancellationToken);
     }
-
-
-    private static Result Validate(RichSupplier richSupplier)
-        => GenericValidator<RichSupplier>.Validate(v =>
-            {
-                v.RuleFor(r => r.Name).NotEmpty();
-                v.RuleFor(r => r.ConnectorUrl).NotEmpty();
-            },
-            richSupplier);
 
 
     private async Task<Result<Supplier>> GetSupplier(int supplierId, CancellationToken cancellationToken)
