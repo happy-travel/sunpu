@@ -28,11 +28,11 @@ public class SupplierService : ISupplierService
     }
 
 
-    public async Task<Result<RichSupplier>> Get(int supplierId, CancellationToken cancellationToken)
+    public async Task<Result<RichSupplier>> Get(string supplierCode, CancellationToken cancellationToken)
     {
-        var supplier = await _supplierStorage.Get(supplierId, cancellationToken);
+        var supplier = await _supplierStorage.Get(supplierCode, cancellationToken);
 
-        return supplier?.ToRichSupplier() ?? Result.Failure<RichSupplier>($"The supplier with id {supplierId} is not found");
+        return supplier?.ToRichSupplier() ?? Result.Failure<RichSupplier>($"The supplier with code {supplierCode} is not found");
     }
 
 
@@ -88,9 +88,9 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Modify(int supplierId, RichSupplier richSupplier, CancellationToken cancellationToken)
+    public Task<Result> Modify(string supplierCode, RichSupplier richSupplier, CancellationToken cancellationToken)
     {
-        return GetSupplier(supplierId, cancellationToken)
+        return GetSupplier(supplierCode, cancellationToken)
             .Check(_ => Validate(richSupplier))
             .Ensure(IsUnique, "A supplier with the same name already exists")
             .Bind(Update)
@@ -98,7 +98,7 @@ public class SupplierService : ISupplierService
         
         
         async Task<bool> IsUnique(Supplier supplier)
-            => !await _sunpuContext.Suppliers.AnyAsync(s => s.Name.ToLower() == richSupplier.Name.ToLower() && s.Id != supplierId, cancellationToken);
+            => !await _sunpuContext.Suppliers.AnyAsync(s => s.Name.ToLower() == richSupplier.Name.ToLower() && s.Code != supplierCode, cancellationToken);
 
 
         async Task<Result> Update(Supplier supplier)
@@ -137,9 +137,9 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Delete(int supplierId, CancellationToken cancellationToken)
+    public Task<Result> Delete(string supplierCode, CancellationToken cancellationToken)
     {
-        return GetSupplier(supplierId, cancellationToken)
+        return GetSupplier(supplierCode, cancellationToken)
             .Bind(Delete)
             .Tap(RefreshStorage);
 
@@ -158,9 +158,9 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Activate(int supplierId, string reason, CancellationToken cancellationToken)
+    public Task<Result> Activate(string supplierCode, string reason, CancellationToken cancellationToken)
     {
-        return GetSupplier(supplierId, cancellationToken)
+        return GetSupplier(supplierCode, cancellationToken)
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(Activate)
                 .Bind(SaveToHistory))
@@ -199,9 +199,9 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Deactivate(int supplierId, string reason, CancellationToken cancellationToken)
+    public Task<Result> Deactivate(string supplierCode, string reason, CancellationToken cancellationToken)
     {
-        return GetSupplier(supplierId, cancellationToken)
+        return GetSupplier(supplierCode, cancellationToken)
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(Deactivate)
                 .Bind(SaveToHistory))
@@ -240,13 +240,11 @@ public class SupplierService : ISupplierService
     }
 
 
-    private async Task<Result<Supplier>> GetSupplier(int supplierId, CancellationToken cancellationToken)
+    private async Task<Result<Supplier>> GetSupplier(string supplierCode, CancellationToken cancellationToken)
     {
-        var supplier = await _sunpuContext.Suppliers.FirstOrDefaultAsync(s => s.Id == supplierId, cancellationToken);
+        var supplier = await _sunpuContext.Suppliers.FirstOrDefaultAsync(s => s.Code == supplierCode, cancellationToken);
 
-        return supplier is null
-            ? Result.Failure<Supplier>($"The supplier with id { supplierId} is not found")
-            : supplier;
+        return supplier ?? Result.Failure<Supplier>($"The supplier with code {supplierCode} is not found");
     }
 
 

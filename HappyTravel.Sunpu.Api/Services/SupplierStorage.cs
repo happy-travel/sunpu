@@ -16,22 +16,22 @@ public class SupplierStorage : ISupplierStorage
 
     public async Task<List<Supplier>> Get(CancellationToken cancellationToken)
     {
-        return await _flow.GetOrSetAsync(SuppliersKey, async () => await LoadFromDatabase(cancellationToken), supplierLifeTime, cancellationToken);
+        return await _flow.GetOrSetAsync(SuppliersKey, async () => await LoadFromDatabase(cancellationToken), SupplierLifeTime, cancellationToken);
     }
 
 
-    public async Task<Supplier?> Get(int supplierId, CancellationToken cancellationToken)
+    public async Task<Supplier?> Get(string supplierCode, CancellationToken cancellationToken)
     {
         var suppliers = await Get(cancellationToken);
 
-        return suppliers.SingleOrDefault(s => s.Id == supplierId);
+        return suppliers.SingleOrDefault(s => s.Code == supplierCode);
     }
 
 
     public async Task Refresh(CancellationToken cancellationToken)
     { 
         var suppliers = await LoadFromDatabase(cancellationToken);
-        _flow.Set(SuppliersKey, suppliers, supplierLifeTime);
+        _flow.Set(SuppliersKey, suppliers, SupplierLifeTime);
     }
 
 
@@ -41,7 +41,7 @@ public class SupplierStorage : ISupplierStorage
 
     private const string SuppliersKey = "Suppliers";
 
-    private static readonly TimeSpan supplierLifeTime = TimeSpan.FromHours(24);
+    private static readonly TimeSpan SupplierLifeTime = TimeSpan.FromHours(24);
 
     private readonly IMemoryFlow _flow;
     private readonly SunpuContext _sunpuContext;
