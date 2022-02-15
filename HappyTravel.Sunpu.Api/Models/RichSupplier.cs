@@ -16,4 +16,5 @@ public class RichSupplier
     public Contact? PrimaryContact { get; init; }
     public List<Contact>? SupportContacts { get; init; }
     public List<Contact>? ReservationsContacts { get; init; }
+    public Dictionary<string, string>? CustomHeaders { get; init; }
 }
