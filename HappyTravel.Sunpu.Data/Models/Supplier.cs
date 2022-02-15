@@ -17,4 +17,5 @@ public class Supplier
     public List<Contact>? ReservationsContacts { get; set; }
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
     public DateTimeOffset? Modified { get; set; }
+    public Dictionary<string, string>? CustomHeaders { get; set; }
 }
