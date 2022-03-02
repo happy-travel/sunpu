@@ -41,7 +41,7 @@ public class SupplierStorage : ISupplierStorage
 
     private const string SuppliersKey = "Suppliers";
 
-    private static readonly TimeSpan SupplierLifeTime = TimeSpan.FromHours(24);
+    private static readonly TimeSpan SupplierLifeTime = TimeSpan.FromMinutes(5);
 
     private readonly IMemoryFlow _flow;
     private readonly SunpuContext _sunpuContext;
