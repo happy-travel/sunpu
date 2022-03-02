@@ -9,6 +9,7 @@ public static class SupplierExtension
     {
         return new SlimSupplier
         {
+            Id = supplier.Id,
             Code = supplier.Code,
             Name = supplier.Name,
             IsEnabled = supplier.IsEnabled,
