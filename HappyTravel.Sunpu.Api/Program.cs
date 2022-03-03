@@ -5,7 +5,6 @@ using HappyTravel.VaultClient;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
-var environment = builder.Environment;
 
 using var vaultClient = new VaultClient(new VaultOptions
 {
@@ -23,7 +22,7 @@ builder.ConfigureAppConfiguration();
 builder.ConfigureLogging();
 builder.ConfigureSentry();
 builder.ConfigureServiceProvider();
-builder.ConfigureServices();
+builder.ConfigureServices(configuration);
 builder.ConfigureDatabaseOptions(databaseOptions);
 builder.ConfigureAuthentication(authorityOptions);
 
