@@ -7,7 +7,7 @@ namespace HappyTravel.Sunpu.Api.Services;
 
 public class SupplierStorage : ISupplierStorage
 {
-    public SupplierStorage(IMemoryFlow flow, SunpuContext sunpuContext)
+    public SupplierStorage(IDistributedFlow flow, SunpuContext sunpuContext)
     {
         _flow = flow;
         _sunpuContext = sunpuContext;
@@ -16,7 +16,10 @@ public class SupplierStorage : ISupplierStorage
 
     public async Task<List<Supplier>> Get(CancellationToken cancellationToken)
     {
-        return await _flow.GetOrSetAsync(SuppliersKey, async () => await LoadFromDatabase(cancellationToken), SupplierLifeTime, cancellationToken);
+        return await _flow.GetOrSetAsync(key: SuppliersKey, 
+            getValueFunction: async () => await LoadFromDatabase(cancellationToken),
+            absoluteExpirationRelativeToNow: SupplierLifeTime, 
+            cancellationToken: cancellationToken) ?? throw new NullReferenceException("Suppliers list cannot be null");
     }
 
 
@@ -31,7 +34,7 @@ public class SupplierStorage : ISupplierStorage
     public async Task Refresh(CancellationToken cancellationToken)
     { 
         var suppliers = await LoadFromDatabase(cancellationToken);
-        _flow.Set(SuppliersKey, suppliers, SupplierLifeTime);
+        await _flow.SetAsync(SuppliersKey, suppliers, SupplierLifeTime, cancellationToken);
     }
 
 
@@ -43,6 +46,6 @@ public class SupplierStorage : ISupplierStorage
 
     private static readonly TimeSpan SupplierLifeTime = TimeSpan.FromMinutes(5);
 
-    private readonly IMemoryFlow _flow;
+    private readonly IDistributedFlow _flow;
     private readonly SunpuContext _sunpuContext;
 }
