@@ -25,6 +25,7 @@ public static class ConfigureServicesExtension
         builder.Services.ConfigureFlowOptions();
         builder.Services.ConfigureSwagger();
         builder.Services.AddTransient<ISupplierService, SupplierService>();
+        builder.Services.AddTransient<ISupplierPriorityService, SupplierPriorityService>();
         builder.Services.AddTransient<ISupplierStorage, SupplierStorage>();
         
     }
