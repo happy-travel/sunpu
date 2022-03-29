@@ -3,6 +3,7 @@ using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Data;
 using HappyTravel.Sunpu.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace HappyTravel.Sunpu.Api.Services
 {
@@ -35,9 +36,8 @@ namespace HappyTravel.Sunpu.Api.Services
                 */
 
                 var priorities = supplierPriorities!
-                        //.DefaultIfEmpty(new KeyValuePair<string, Dictionary<PriorityTypes, int>>(supplier.Code, GetEmptyDictionary(suppliers.Count)))
                         .Select(sp => new { Supplier = sp.Key, Order = sp.Value
-                            
+                            //.DefaultIfEmpty(new KeyValuePair<string, Dictionary<PriorityTypes, int>>(sp.Key, GetEmptyDictionary(suppliers.Count)))
                             .Single(pt => pt.Key.ToString() == priorityType) })
                         .OrderBy(a => a.Order)
                         .Select(a => a.Supplier)
