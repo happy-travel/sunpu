@@ -27,6 +27,7 @@ public class SunpuContext : DbContext
             e.Property(s => s.Created).IsRequired();
             e.Property(s => s.Modified);
             e.Property(s => s.CustomHeaders).HasColumnType("jsonb");
+            e.Property(s => s.Priority).HasColumnType("jsonb");
         });
 
         builder.Entity<SupplierActivationHistoryEntry>(e =>
