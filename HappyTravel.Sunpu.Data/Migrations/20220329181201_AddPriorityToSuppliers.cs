@@ -21,8 +21,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             var column = "Priority";
             migrationBuilder.UpdateData(table, keyColumn, "netstorming", column, new Dictionary<PriorityTypes, int> 
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 6 },
+                { PriorityTypes.Photos, 7 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -37,8 +37,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "illusions", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 7 },
+                { PriorityTypes.Photos, 8 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -53,8 +53,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "directContracts", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 5 },
+                { PriorityTypes.Photos, 6 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -69,8 +69,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "etg", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 4 },
+                { PriorityTypes.Photos, 5 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -85,8 +85,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "rakuten", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 8 },
+                { PriorityTypes.Photos, 9 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -102,7 +102,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
             migrationBuilder.UpdateData(table, keyColumn, "columbus", column, new Dictionary<PriorityTypes, int>
             {
                 { PriorityTypes.Name, 1 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Photos, 2 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -117,8 +117,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "travelgateXTest", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 9 },
+                { PriorityTypes.Photos, 10 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -134,7 +134,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
             migrationBuilder.UpdateData(table, keyColumn, "jumeirah", column, new Dictionary<PriorityTypes, int>
             {
                 { PriorityTypes.Name, 2 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Photos, 3 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -150,7 +150,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
             migrationBuilder.UpdateData(table, keyColumn, "darina", column, new Dictionary<PriorityTypes, int>
             {
                 { PriorityTypes.Name, 3 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Photos, 4 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -165,8 +165,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "yalago", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 10 },
+                { PriorityTypes.Photos, 11 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -181,8 +181,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "paximum", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 11 },
+                { PriorityTypes.Photos, 12 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -213,8 +213,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "bronevik", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 14 },
+                { PriorityTypes.Photos, 14 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -261,8 +261,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "hotelBeds", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 13 },
+                { PriorityTypes.Photos, 1 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -277,8 +277,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "hotelbookPro", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 12 },
+                { PriorityTypes.Photos, 13 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -293,8 +293,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "bookMe", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 15 },
+                { PriorityTypes.Photos, 15 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -309,8 +309,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "roibos", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 16 },
+                { PriorityTypes.Photos, 16 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
@@ -501,8 +501,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
             });
             migrationBuilder.UpdateData(table, keyColumn, "avraTours", column, new Dictionary<PriorityTypes, int>
             {
-                { PriorityTypes.Name, 0 },
-                { PriorityTypes.Photos, 0 },
+                { PriorityTypes.Name, 17 },
+                { PriorityTypes.Photos, 17 },
                 { PriorityTypes.Rating, 0 },
                 { PriorityTypes.Category, 0 },
                 { PriorityTypes.Schedule, 0 },
