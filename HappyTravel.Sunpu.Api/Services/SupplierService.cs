@@ -79,9 +79,11 @@ public class SupplierService : ISupplierService
             => GenericValidator<RichSupplier>.Validate(v =>
                 {
                     v.RuleFor(r => r.Name).NotEmpty();
-                    v.RuleFor(r => r.Code).NotEmpty();
-                    v.RuleFor(r => r.Code).Must(c => Char.IsLower(c.First()))
-                        .WithMessage("Supplier code must be in camel case");
+                    v.RuleFor(r => r.Code).NotEmpty()
+                        .Must(r => Char.IsLower(r.First()))
+                        .WithMessage("Supplier code must be in camel case")
+                        .Matches("^[a-zA-Z0-9]+$")
+                        .WithMessage("The supplier code can only contain upper and lower case letters and numbers");
                     v.RuleFor(r => r.ConnectorUrl).NotEmpty();
                 },
                 richSupplier);
