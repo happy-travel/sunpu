@@ -291,6 +291,38 @@ namespace HappyTravel.Sunpu.Data.Migrations
                 { PriorityTypes.TextualDescriptions, 17 },
                 { PriorityTypes.AccommodationAmenities, 17 }
             });
+            migrationBuilder.UpdateData(table, keyColumn, "accor", column, new Dictionary<PriorityTypes, int>
+            {
+                { PriorityTypes.Name, 18 },
+                { PriorityTypes.Photos, 18 },
+                { PriorityTypes.Rating, 18 },
+                { PriorityTypes.Category, 18 },
+                { PriorityTypes.Schedule, 18 },
+                { PriorityTypes.ContactInfo, 18 },
+                { PriorityTypes.LocationInfo, 18 },
+                { PriorityTypes.PropertyType, 18 },
+                { PriorityTypes.RoomAmenities, 18 },
+                { PriorityTypes.AdditionalInfo, 18 },
+                { PriorityTypes.TypeDescription, 18 },
+                { PriorityTypes.TextualDescriptions, 18 },
+                { PriorityTypes.AccommodationAmenities, 18 }
+            });
+            migrationBuilder.UpdateData(table, keyColumn, "hyperGuest", column, new Dictionary<PriorityTypes, int>
+            {
+                { PriorityTypes.Name, 19 },
+                { PriorityTypes.Photos, 19 },
+                { PriorityTypes.Rating, 19 },
+                { PriorityTypes.Category, 19 },
+                { PriorityTypes.Schedule, 19 },
+                { PriorityTypes.ContactInfo, 19 },
+                { PriorityTypes.LocationInfo, 19 },
+                { PriorityTypes.PropertyType, 19 },
+                { PriorityTypes.RoomAmenities, 19 },
+                { PriorityTypes.AdditionalInfo, 19 },
+                { PriorityTypes.TypeDescription, 19 },
+                { PriorityTypes.TextualDescriptions, 19 },
+                { PriorityTypes.AccommodationAmenities, 19 }
+            });
 
             var suppliersWithoutPriority = new List<string>
             {
@@ -299,10 +331,8 @@ namespace HappyTravel.Sunpu.Data.Migrations
                 "sodis",
                 "sabre",
                 "bakuun",
-                "accor",
                 "nirvana",
                 "nuitee",
-                "hyperGuest",
                 "solole",
                 "grnConnect",
                 "methabook",

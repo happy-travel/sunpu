@@ -36,14 +36,13 @@ namespace HappyTravel.Sunpu.Api.Services
                 */
 
                 var priorities = supplierPriorities!
-                        .Select(sp => new { Supplier = sp.Key, Order = sp.Value
-                            //.DefaultIfEmpty(new KeyValuePair<string, Dictionary<PriorityTypes, int>>(sp.Key, GetEmptyDictionary(suppliers.Count)))
-                            .Single(pt => pt.Key.ToString() == priorityType) })
+                        .Select(sp => new { Supplier = sp.Key, Order = sp.Value!
+                            .Single(pt => pt.Key.ToString() == priorityType).Value })
                         .OrderBy(a => a.Order)
                         .Select(a => a.Supplier)
                         .ToList();
 
-                supplierPriorityByTypes.Add(priorityType, priorities);
+                supplierPriorityByTypes.Add(priorityType.ToLower(), priorities);
             }
 
             return supplierPriorityByTypes;
@@ -63,7 +62,7 @@ namespace HappyTravel.Sunpu.Api.Services
             foreach (var supplier in suppliers)
             {
                 var supplierPriority = supplierPriorities!
-                    .DefaultIfEmpty(new KeyValuePair<string, Dictionary<PriorityTypes, int>>(supplier.Code, GetEmptyDictionary(suppliers.Count)))
+                    .DefaultIfEmpty(new KeyValuePair<string, Dictionary<PriorityTypes, int>>(supplier.Code, GetDefaultPriority(suppliers.Count)))
                     .Single(s => s.Key == supplier.Code);
 
                 supplier.Priority = supplierPriority.Value;
@@ -75,7 +74,7 @@ namespace HappyTravel.Sunpu.Api.Services
         }
 
 
-        private static Dictionary<PriorityTypes, int> GetEmptyDictionary(int supplierCount)
+        private static Dictionary<PriorityTypes, int> GetDefaultPriority(int supplierCount)
         {
             var priorities = new Dictionary<PriorityTypes, int>();
             foreach (var priorityType in Enum.GetValues(typeof(PriorityTypes)))

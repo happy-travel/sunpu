@@ -49,8 +49,10 @@ public class SupplierService : ISupplierService
                !await _sunpuContext.Suppliers.AnyAsync(s => s.Code.ToLower() == richSupplier.Code.ToLower(), cancellationToken);
 
 
-        Task Add()
+        async Task Add()
         {
+            var countSuppliers = await _sunpuContext.Suppliers.CountAsync(cancellationToken);
+
             _sunpuContext.Suppliers.Add(new Supplier
             {
                 Name = richSupplier.Name,
@@ -65,10 +67,11 @@ public class SupplierService : ISupplierService
                 SupportContacts = richSupplier.SupportContacts,
                 ReservationsContacts = richSupplier.ReservationsContacts,
                 Created = DateTimeOffset.UtcNow,
-                CustomHeaders = richSupplier.CustomHeaders
+                CustomHeaders = richSupplier.CustomHeaders,
+                Priority = GetDefaultPriority(countSuppliers + 1)
             });
 
-            return _sunpuContext.SaveChangesAsync(cancellationToken);
+            await _sunpuContext.SaveChangesAsync(cancellationToken);
         }
 
 
@@ -247,6 +250,18 @@ public class SupplierService : ISupplierService
         var supplier = await _sunpuContext.Suppliers.FirstOrDefaultAsync(s => s.Code == supplierCode, cancellationToken);
 
         return supplier ?? Result.Failure<Supplier>($"The supplier with code {supplierCode} is not found");
+    }
+
+
+    private static Dictionary<PriorityTypes, int> GetDefaultPriority(int supplierCount)
+    {
+        var priorities = new Dictionary<PriorityTypes, int>();
+        foreach (var priorityType in Enum.GetValues(typeof(PriorityTypes)))
+        {
+            priorities.Add((PriorityTypes)priorityType, supplierCount);
+        }
+
+        return priorities;
     }
 
 
