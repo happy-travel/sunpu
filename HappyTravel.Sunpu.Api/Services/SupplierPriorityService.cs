@@ -3,7 +3,6 @@ using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Data;
 using HappyTravel.Sunpu.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace HappyTravel.Sunpu.Api.Services
 {
@@ -26,15 +25,6 @@ namespace HappyTravel.Sunpu.Api.Services
             var supplierPriorityByTypes = new SupplierPriorityByTypes();
             foreach (var priorityType in Enum.GetValues(typeof(PriorityTypes)))
             {
-                /*
-                foreach (var supplier in suppliers)
-                {
-                    var supplierPriority = supplierPriorities!
-                        .DefaultIfEmpty(new KeyValuePair<string, Dictionary<PriorityTypes, int>>(supplier.Code, GetEmptyDictionary(suppliers.Count)))
-                        .Single(s => s.Key == supplier.Code);
-                }
-                */
-
                 var priorities = supplierPriorities!
                         .Select(sp => new { Supplier = sp.Key, Order = sp.Value!
                             .Single(pt => pt.Key == (PriorityTypes)priorityType).Value })
@@ -68,7 +58,6 @@ namespace HappyTravel.Sunpu.Api.Services
             {
                 var supplierPriority = priorityList.Where(pl => pl.SupplierCode == supplier.Code)
                     .OrderBy(pl => pl.Priority)
-                    //.Select(pl => new KeyValuePair<PriorityTypes, int>(pl.Priority, pl.Order))
                     .ToDictionary(pl => pl.Priority, pl => pl.Order);
 
                 supplier.Priority = supplierPriority;
@@ -77,18 +66,6 @@ namespace HappyTravel.Sunpu.Api.Services
             await _sunpuContext.SaveChangesAsync(cancellationToken);
 
             return Result.Success();
-        }
-
-
-        private static Dictionary<PriorityTypes, int> GetDefaultPriority(int supplierCount)
-        {
-            var priorities = new Dictionary<PriorityTypes, int>();
-            foreach (var priorityType in Enum.GetValues(typeof(PriorityTypes)))
-            {
-                priorities.Add((PriorityTypes)priorityType, supplierCount);
-            }
-
-            return priorities;
         }
 
 
