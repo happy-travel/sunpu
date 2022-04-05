@@ -1,4 +1,6 @@
-﻿namespace HappyTravel.Sunpu.Data.Models;
+﻿using System.Runtime.Serialization;
+
+namespace HappyTravel.Sunpu.Data.Models;
 
 public enum PriorityTypes
 {

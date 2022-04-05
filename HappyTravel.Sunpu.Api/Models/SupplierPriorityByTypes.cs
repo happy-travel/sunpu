@@ -1,6 +1,8 @@
-﻿namespace HappyTravel.Sunpu.Api.Models
+﻿using HappyTravel.Sunpu.Data.Models;
+
+namespace HappyTravel.Sunpu.Api.Models
 {
-    public class SupplierPriorityByTypes : Dictionary<string, List<string>>
+    public class SupplierPriorityByTypes : Dictionary<PriorityTypes, List<string>>
     {
     }
 }
