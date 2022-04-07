@@ -43,7 +43,7 @@
         </member>
         <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Activate(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
-             Activates specified supplier
+            Activates specified supplier
             </summary>
             <param name="supplierCode">Code of the supplier</param>
             <param name="reason">Reason for activating the supplier</param>
@@ -51,10 +51,23 @@
         </member>
         <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.Deactivate(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
-             Deactivates specified supplier
+            Deactivates specified supplier
             </summary>
             <param name="supplierCode">Code of the supplier</param>
-            <param name="reason">Reason for activating the supplier</param>
+            <param name="reason">Reason for deactivating the supplier</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierPriorityController.GetPriority(System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of priority suppliers by priority type
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierPriorityController.ModifyPriority(HappyTravel.Sunpu.Api.Models.SupplierPriorityByTypes,System.Threading.CancellationToken)">
+            <summary>
+            Modified a list of prioritiy suppliers by priority type
+            </summary>
+            <param name="supplierPriorityByTypes">List of prioritiy suppliers by priority type</param>
             <param name="cancellationToken">Cancellation token</param>
         </member>
     </members>

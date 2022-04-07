@@ -80,7 +80,7 @@ public class SupplierController : BaseController
 
 
     /// <summary>
-    ///  Activates specified supplier
+    /// Activates specified supplier
     /// </summary>
     /// <param name="supplierCode">Code of the supplier</param>
     /// <param name="reason">Reason for activating the supplier</param>
@@ -93,10 +93,10 @@ public class SupplierController : BaseController
 
 
     /// <summary>
-    ///  Deactivates specified supplier
+    /// Deactivates specified supplier
     /// </summary>
     /// <param name="supplierCode">Code of the supplier</param>
-    /// <param name="reason">Reason for activating the supplier</param>
+    /// <param name="reason">Reason for deactivating the supplier</param>
     /// <param name="cancellationToken">Cancellation token</param>
     [HttpPost("{supplierCode}/deactivate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
