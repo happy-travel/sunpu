@@ -1,8 +1,8 @@
-﻿using HappyTravel.Sunpu.Data.Models;
+﻿using HappyTravel.MapperContracts.Public.Accommodations.Enums;
 
 namespace HappyTravel.Sunpu.Api.Models
 {
-    public class SupplierPriorityByTypes : Dictionary<PriorityTypes, List<string>>
+    public class SupplierPriorityByTypes : Dictionary<AccommodationDataTypes, List<string>>
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using HappyTravel.MapperContracts.Public.Accommodations.Enums;
 using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Data;
 using HappyTravel.Sunpu.Data.Models;
@@ -23,16 +24,16 @@ namespace HappyTravel.Sunpu.Api.Services
             var supplierPriorities = await _sunpuContext.Suppliers.ToDictionaryAsync(s => s.Code, s => s.Priority, cancellationToken);
 
             var supplierPriorityByTypes = new SupplierPriorityByTypes();
-            foreach (var priorityType in Enum.GetValues(typeof(PriorityTypes)))
+            foreach (var priorityType in Enum.GetValues(typeof(AccommodationDataTypes)))
             {
                 var priorities = supplierPriorities!
                         .Select(sp => new { Supplier = sp.Key, Order = sp.Value!
-                            .Single(pt => pt.Key == (PriorityTypes)priorityType).Value })
+                            .Single(pt => pt.Key == (AccommodationDataTypes)priorityType).Value })
                         .OrderBy(a => a.Order)
                         .Select(a => a.Supplier)
                         .ToList();
 
-                supplierPriorityByTypes.Add((PriorityTypes)priorityType, priorities);
+                supplierPriorityByTypes.Add((AccommodationDataTypes)priorityType, priorities);
             }
 
             return supplierPriorityByTypes;

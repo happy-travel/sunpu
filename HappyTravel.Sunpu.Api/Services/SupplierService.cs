@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using FluentValidation;
+using HappyTravel.MapperContracts.Public.Accommodations.Enums;
 using HappyTravel.Sunpu.Api.Infrastructure;
 using HappyTravel.Sunpu.Api.Infrastructure.FunctionalExtensions;
 using HappyTravel.Sunpu.Api.Infrastructure.ModelExtensions;
@@ -253,12 +254,12 @@ public class SupplierService : ISupplierService
     }
 
 
-    private static Dictionary<PriorityTypes, int> GetDefaultPriority(int supplierCount)
+    private static Dictionary<AccommodationDataTypes, int> GetDefaultPriority(int supplierCount)
     {
-        var priorities = new Dictionary<PriorityTypes, int>();
-        foreach (var priorityType in Enum.GetValues(typeof(PriorityTypes)))
+        var priorities = new Dictionary<AccommodationDataTypes, int>();
+        foreach (var priorityType in Enum.GetValues(typeof(AccommodationDataTypes)))
         {
-            priorities.Add((PriorityTypes)priorityType, supplierCount);
+            priorities.Add((AccommodationDataTypes)priorityType, supplierCount);
         }
 
         return priorities;
