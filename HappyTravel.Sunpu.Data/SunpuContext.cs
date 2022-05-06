@@ -17,7 +17,7 @@ public class SunpuContext : DbContext
             e.HasKey(s => s.Id);
             e.Property(s => s.Code).IsRequired();
             e.Property(s => s.Name).IsRequired();
-            e.Property(s => s.IsEnabled).IsRequired();
+            e.Property(s => s.IsFullyEnabled).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();
             e.Property(s => s.IsMultiRoomFlowSupported).IsRequired();
             e.Property(s => s.WebSite);

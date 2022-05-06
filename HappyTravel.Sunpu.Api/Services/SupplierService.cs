@@ -58,7 +58,7 @@ public class SupplierService : ISupplierService
             {
                 Name = richSupplier.Name,
                 Code = richSupplier.Code,
-                IsEnabled = richSupplier.IsEnabled,
+                IsFullyEnabled = richSupplier.IsFullyEnabled,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
                 IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
@@ -175,7 +175,7 @@ public class SupplierService : ISupplierService
 
         Task Activate(Supplier supplier)
         {
-            supplier.IsEnabled = true;
+            supplier.IsFullyEnabled = true;
             _sunpuContext.Suppliers.Update(supplier);
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -216,7 +216,7 @@ public class SupplierService : ISupplierService
 
         Task Deactivate(Supplier supplier)
         {
-            supplier.IsEnabled = false;
+            supplier.IsFullyEnabled = false;
             _sunpuContext.Suppliers.Update(supplier);
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
