@@ -59,6 +59,7 @@ public class SupplierService : ISupplierService
                 Name = richSupplier.Name,
                 Code = richSupplier.Code,
                 IsEnabled = richSupplier.IsEnabled,
+                Mode = richSupplier.Mode,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
                 IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
@@ -232,6 +233,48 @@ public class SupplierService : ISupplierService
             {
                 SupplierId = supplier.Id,
                 IsEnabled = false,
+                Reason = reason,
+                Created = DateTime.UtcNow
+            });
+            await _sunpuContext.SaveChangesAsync(cancellationToken);
+
+            return Result.Success();
+        }
+
+
+        Task RefreshStorage()
+            => _supplierStorage.Refresh(cancellationToken);
+    }
+
+
+    public Task<Result> SetMode(string supplierCode, Mode mode, string reason, CancellationToken cancellationToken)
+    {
+        return GetSupplier(supplierCode, cancellationToken)
+            .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
+                .Tap(SetMode)
+                .Bind(SaveToHistory))
+            .Tap(RefreshStorage);
+
+
+        Task SetMode(Supplier supplier)
+        {
+            supplier.Mode = mode;
+            _sunpuContext.Suppliers.Update(supplier);
+
+            return _sunpuContext.SaveChangesAsync(cancellationToken);
+        }
+
+
+        async Task<Result> SaveToHistory(Supplier supplier)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+                return Result.Failure("The reason for changing the mode is not specified");
+
+            _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
+            {
+                SupplierId = supplier.Id,
+                IsEnabled = supplier.IsEnabled,
+                Mode = mode,
                 Reason = reason,
                 Created = DateTime.UtcNow
             });

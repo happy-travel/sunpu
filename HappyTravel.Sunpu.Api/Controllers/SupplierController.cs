@@ -1,5 +1,6 @@
 ﻿using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Api.Services;
+using HappyTravel.Sunpu.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -103,6 +104,22 @@ public class SupplierController : BaseController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Deactivate([FromRoute] string supplierCode, [FromQuery] string reason, CancellationToken cancellationToken)
         => NoContentOrBadRequest(await _supplierService.Deactivate(supplierCode, reason, cancellationToken));
+
+
+    /// <summary>
+    /// Set mode for supplier
+    /// </summary>
+    /// <param name="supplierCode">Code of the supplier</param>
+    /// <param name="mode">Mode of the supplier</param>
+    /// <param name="reason">Reason for setting the mode</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns></returns>
+    [HttpPost("{supplierCode}/set-mode")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SetSupplierMode([FromRoute] string supplierCode, [FromQuery] Mode mode, [FromQuery] string reason,
+        CancellationToken cancellationToken) 
+        => NoContentOrBadRequest(await _supplierService.SetMode(supplierCode, mode, reason, cancellationToken));
 
 
     private readonly ISupplierService _supplierService;

@@ -9,6 +9,7 @@ public class Supplier
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public bool IsEnabled { get; set; }
+    public Mode Mode { get; set; } = Mode.Disabled;
     public string ConnectorUrl { get; set; } = string.Empty;
     public string? ConnectorGrpcEndpoint { get; set; }
     public bool IsMultiRoomFlowSupported { get; set; }
