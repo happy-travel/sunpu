@@ -59,7 +59,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
                     b.Property<bool>("IsMultiRoomFlowSupported")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Mode")
+                    b.Property<int>("OperationMode")
                         .HasColumnType("integer");
 
                     b.Property<DateTimeOffset?>("Modified")
@@ -103,7 +103,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Mode")
+                    b.Property<int>("OperationMode")
                         .HasColumnType("integer");
 
                     b.Property<string>("Reason")
