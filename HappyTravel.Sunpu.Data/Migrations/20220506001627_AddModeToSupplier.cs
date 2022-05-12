@@ -9,7 +9,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "Mode",
+                name: "OperationMode",
                 table: "Suppliers",
                 type: "integer",
                 nullable: false,
@@ -19,7 +19,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Mode",
+                name: "OperationMode",
                 table: "Suppliers");
         }
     }
