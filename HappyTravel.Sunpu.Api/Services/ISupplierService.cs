@@ -13,5 +13,5 @@ public interface ISupplierService
     Task<Result> Delete(string supplierCode, CancellationToken cancellationToken);
     Task<Result> Activate(string supplierCode, string reason, CancellationToken cancellationToken);
     Task<Result> Deactivate(string supplierCode, string reason, CancellationToken cancellationToken);
-    Task<Result> SetMode(string supplierCode, Mode mode, string reason, CancellationToken cancellationToken);
+    Task<Result> SetOperationMode(string supplierCode, OperationMode operationMode, string reason, CancellationToken cancellationToken);
 }

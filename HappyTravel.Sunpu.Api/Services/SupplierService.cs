@@ -59,7 +59,7 @@ public class SupplierService : ISupplierService
                 Name = richSupplier.Name,
                 Code = richSupplier.Code,
                 IsEnabled = richSupplier.IsEnabled,
-                Mode = richSupplier.Mode,
+                OperationMode = richSupplier.OperationMode,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
                 IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
@@ -247,7 +247,7 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> SetMode(string supplierCode, Mode mode, string reason, CancellationToken cancellationToken)
+    public Task<Result> SetOperationMode(string supplierCode, OperationMode operationMode, string reason, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierCode, cancellationToken)
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
@@ -258,7 +258,7 @@ public class SupplierService : ISupplierService
 
         Task SetMode(Supplier supplier)
         {
-            supplier.Mode = mode;
+            supplier.OperationMode = operationMode;
             _sunpuContext.Suppliers.Update(supplier);
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -274,7 +274,7 @@ public class SupplierService : ISupplierService
             {
                 SupplierId = supplier.Id,
                 IsEnabled = supplier.IsEnabled,
-                Mode = mode,
+                OperationMode = operationMode,
                 Reason = reason,
                 Created = DateTime.UtcNow
             });

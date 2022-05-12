@@ -110,16 +110,16 @@ public class SupplierController : BaseController
     /// Set mode for supplier
     /// </summary>
     /// <param name="supplierCode">Code of the supplier</param>
-    /// <param name="mode">Mode of the supplier</param>
+    /// <param name="operationMode">Mode of the supplier</param>
     /// <param name="reason">Reason for setting the mode</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns></returns>
-    [HttpPost("{supplierCode}/set-mode")]
+    [HttpPost("{supplierCode}/set-operation-mode")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> SetSupplierMode([FromRoute] string supplierCode, [FromQuery] Mode mode, [FromQuery] string reason,
+    public async Task<IActionResult> SetSupplierMode([FromRoute] string supplierCode, [FromQuery] OperationMode operationMode, [FromQuery] string reason,
         CancellationToken cancellationToken) 
-        => NoContentOrBadRequest(await _supplierService.SetMode(supplierCode, mode, reason, cancellationToken));
+        => NoContentOrBadRequest(await _supplierService.SetOperationMode(supplierCode, operationMode, reason, cancellationToken));
 
 
     private readonly ISupplierService _supplierService;

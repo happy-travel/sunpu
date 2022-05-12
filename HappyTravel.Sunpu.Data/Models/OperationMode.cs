@@ -1,8 +1,8 @@
 namespace HappyTravel.Sunpu.Data.Models;
 
-public enum Mode
+public enum OperationMode
 {
     Disabled = 0,
-    TestingOnly = 1,
-    FullyEnabled = 2
+    TestOnly = 1,
+    Enabled = 2
 }

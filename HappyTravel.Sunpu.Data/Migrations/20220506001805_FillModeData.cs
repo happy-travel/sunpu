@@ -10,12 +10,12 @@ namespace HappyTravel.Sunpu.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.UpdateData("Suppliers", "IsEnabled", true, "Mode", (int) Mode.FullyEnabled);
+            migrationBuilder.UpdateData("Suppliers", "IsEnabled", true, "OperationMode", (int) OperationMode.Enabled);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.UpdateData("Suppliers", "Mode", (int) Mode.FullyEnabled, "Mode", (int) Mode.Disabled);
+            migrationBuilder.UpdateData("Suppliers", "OperationMode", (int) OperationMode.Enabled, "OperationMode", (int) OperationMode.Disabled);
         }
     }
 }
