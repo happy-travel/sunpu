@@ -2,6 +2,7 @@
 using HappyTravel.ErrorHandling.Extensions;
 using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 using HappyTravel.Sunpu.Api.Services;
+using Newtonsoft.Json.Converters;
 
 namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
@@ -24,6 +25,8 @@ public static class ConfigureServicesExtension
         builder.Services.ConfigureTracing(builder.Environment, builder.Configuration);
         builder.Services.ConfigureFlowOptions();
         builder.Services.ConfigureSwagger();
+        builder.Services.AddMvc()
+            .AddNewtonsoftJson(options => options.SerializerSettings.Converters.Add(new StringEnumConverter()));
         builder.Services.AddTransient<ISupplierService, SupplierService>();
         builder.Services.AddTransient<ISupplierPriorityService, SupplierPriorityService>();
         builder.Services.AddTransient<ISupplierStorage, SupplierStorage>();
