@@ -53,14 +53,14 @@ namespace HappyTravel.Sunpu.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<int>("EnablementState")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsMultiRoomFlowSupported")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("OperationMode")
-                        .HasColumnType("integer");
 
                     b.Property<DateTimeOffset?>("Modified")
                         .HasColumnType("timestamp with time zone");
@@ -100,11 +100,11 @@ namespace HappyTravel.Sunpu.Data.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("EnablementState")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("OperationMode")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Reason")
                         .IsRequired()

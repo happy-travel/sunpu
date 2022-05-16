@@ -59,7 +59,7 @@ public class SupplierService : ISupplierService
                 Name = richSupplier.Name,
                 Code = richSupplier.Code,
                 IsEnabled = richSupplier.IsEnabled,
-                OperationMode = richSupplier.OperationMode,
+                EnablementState = richSupplier.EnablementState,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
                 IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
@@ -247,18 +247,18 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> SetOperationMode(string supplierCode, OperationMode operationMode, string reason, CancellationToken cancellationToken)
+    public Task<Result> SetEnablementState(string supplierCode, EnablementState enablementState, string reason, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierCode, cancellationToken)
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
-                .Tap(SetMode)
+                .Tap(SetState)
                 .Bind(SaveToHistory))
             .Tap(RefreshStorage);
 
 
-        Task SetMode(Supplier supplier)
+        Task SetState(Supplier supplier)
         {
-            supplier.OperationMode = operationMode;
+            supplier.EnablementState = enablementState;
             _sunpuContext.Suppliers.Update(supplier);
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -268,13 +268,13 @@ public class SupplierService : ISupplierService
         async Task<Result> SaveToHistory(Supplier supplier)
         {
             if (string.IsNullOrWhiteSpace(reason))
-                return Result.Failure("The reason for changing the mode is not specified");
+                return Result.Failure("The reason for changing the enablement state is not specified");
 
             _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
             {
                 SupplierId = supplier.Id,
                 IsEnabled = supplier.IsEnabled,
-                OperationMode = operationMode,
+                EnablementState = enablementState,
                 Reason = reason,
                 Created = DateTime.UtcNow
             });
