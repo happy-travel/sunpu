@@ -107,7 +107,7 @@ public class SupplierController : BaseController
 
 
     /// <summary>
-    /// Set enablement state for supplier
+    /// Sets enablement state for supplier
     /// </summary>
     /// <param name="supplierCode">Code of the supplier</param>
     /// <param name="request">Change enablement state request</param>

@@ -59,7 +59,7 @@
         </member>
         <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.SetEnablementState(System.String,HappyTravel.Sunpu.Api.Models.SetEnablementStateRequest,System.Threading.CancellationToken)">
             <summary>
-            Set enablement state for supplier
+            Sets enablement state for supplier
             </summary>
             <param name="supplierCode">Code of the supplier</param>
             <param name="request">Change enablement state request</param>

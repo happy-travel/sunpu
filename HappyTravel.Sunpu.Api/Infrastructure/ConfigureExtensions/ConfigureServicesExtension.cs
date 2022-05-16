@@ -3,7 +3,6 @@ using FloxDc.CacheFlow.Extensions;
 using HappyTravel.ErrorHandling.Extensions;
 using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 using HappyTravel.Sunpu.Api.Services;
-using Newtonsoft.Json.Converters;
 
 namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
