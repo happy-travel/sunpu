@@ -3,22 +3,15 @@ using Newtonsoft.Json;
 
 namespace HappyTravel.Sunpu.Api.Models;
 
-public readonly struct SetEnablementStateRequest
+public record SetEnablementStateRequest
 {
-    [JsonConstructor]
-    public SetEnablementStateRequest(string reason, EnablementState state)
-    {
-        Reason = reason;
-        State = state;
-    }
-        
     /// <summary>
     /// New enablement state of a supplier
     /// </summary>
-    public EnablementState State { get; }
+    public EnablementState State { get; init; }
    
     /// <summary>
     /// Reason to change enablement state of supplier
     /// </summary>
-    public string Reason { get; }
+    public string Reason { get; init; }
 }
