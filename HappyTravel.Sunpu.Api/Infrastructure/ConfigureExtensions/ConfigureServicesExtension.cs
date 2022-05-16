@@ -1,4 +1,5 @@
-﻿using FloxDc.CacheFlow.Extensions;
+﻿using System.Text.Json.Serialization;
+using FloxDc.CacheFlow.Extensions;
 using HappyTravel.ErrorHandling.Extensions;
 using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 using HappyTravel.Sunpu.Api.Services;
@@ -24,6 +25,8 @@ public static class ConfigureServicesExtension
         builder.Services.ConfigureTracing(builder.Environment, builder.Configuration);
         builder.Services.ConfigureFlowOptions();
         builder.Services.ConfigureSwagger();
+        builder.Services.AddMvc()
+            .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
         builder.Services.AddTransient<ISupplierService, SupplierService>();
         builder.Services.AddTransient<ISupplierPriorityService, SupplierPriorityService>();
         builder.Services.AddTransient<ISupplierStorage, SupplierStorage>();
