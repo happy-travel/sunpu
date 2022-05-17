@@ -40,7 +40,7 @@ public class SupplierService : ISupplierService
     public Task<Result> Add(RichSupplier richSupplier, CancellationToken cancellationToken)
     {
         return Validate(richSupplier)
-            .Ensure(IsUnique, "A supplier with the same name already exists")
+            .Ensure(IsUnique, "A supplier with the same code or name already exists")
             .Tap(Add)
             .Tap(RefreshStorage);
 
@@ -83,12 +83,14 @@ public class SupplierService : ISupplierService
         static Result Validate(RichSupplier richSupplier)
             => GenericValidator<RichSupplier>.Validate(v =>
                 {
-                    v.RuleFor(r => r.Name).NotEmpty();
-                    v.RuleFor(r => r.Code).NotEmpty()
-                        .Must(r => Char.IsLower(r.First()))
-                        .WithMessage("Supplier code must be in camel case")
-                        .Matches("^[a-zA-Z0-9]+$")
-                        .WithMessage("The supplier code can only contain upper and lower case letters and numbers");
+                    v.RuleFor(rs => rs.Name).NotEmpty();
+                    v.RuleFor(rs => rs.Code).NotEmpty();
+                    v.When(rs => !string.IsNullOrEmpty(rs.Code), () => {
+                        v.RuleFor(rs => rs.Code).Must(r => Char.IsLower(r.First()))
+                            .WithMessage("Supplier code must be in camel case");
+                        v.RuleFor(rs => rs.Code).Matches("^[a-zA-Z0-9]+$")
+                            .WithMessage("The supplier code can only contain upper and lower case letters and numbers");
+                    });
                     v.RuleFor(r => r.ConnectorUrl).NotEmpty();
                 },
                 richSupplier);
