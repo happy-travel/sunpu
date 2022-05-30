@@ -16,7 +16,6 @@ using var vaultClient = new VaultClient(new VaultOptions
 vaultClient.Login(EnvironmentVariableHelper.Get("Vault:Token", configuration)).GetAwaiter().GetResult();
 
 var databaseOptions = vaultClient.Get(configuration["Database:Options"]).GetAwaiter().GetResult();
-var authorityOptions = vaultClient.Get(configuration["Authority:Options"]).GetAwaiter().GetResult(); 
 
 builder.ConfigureAppConfiguration();
 builder.ConfigureLogging();
@@ -24,7 +23,7 @@ builder.ConfigureSentry();
 builder.ConfigureServiceProvider();
 builder.ConfigureServices(configuration);
 builder.ConfigureDatabaseOptions(databaseOptions);
-builder.ConfigureAuthentication(authorityOptions);
+builder.ConfigureAuthentication();
 
 var app = builder.Build();
 
