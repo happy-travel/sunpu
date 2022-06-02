@@ -103,7 +103,7 @@ steps:
   settings:
     mode: upgrade
     chart: ./Helm/sunpu
-    release: sunpu-dev
+    release: sunpu
     values_files: ["Helm/sunpu/values_dev.yaml"]
     namespace: dev
     skip_tls_verify: true
