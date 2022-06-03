@@ -17,7 +17,8 @@ public static class SupplierExtension
             ConnectorUrl = supplier.ConnectorUrl,
             ConnectorGrpcEndpoint = supplier.ConnectorGrpcEndpoint,
             IsMultiRoomFlowSupported = supplier.IsMultiRoomFlowSupported,
-            CustomHeaders = supplier.CustomHeaders
+            CustomHeaders = supplier.CustomHeaders,
+            CanUseGrpc = supplier.CanUseGrpc
         };
     }
 
@@ -38,7 +39,8 @@ public static class SupplierExtension
             PrimaryContact = supplier.PrimaryContact,
             SupportContacts = supplier.SupportContacts,
             ReservationsContacts = supplier.ReservationsContacts,
-            CustomHeaders = supplier.CustomHeaders
+            CustomHeaders = supplier.CustomHeaders,
+            CanUseGrpc = supplier.CanUseGrpc
         };
     }
 }

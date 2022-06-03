@@ -70,7 +70,8 @@ public class SupplierService : ISupplierService
                 ReservationsContacts = richSupplier.ReservationsContacts,
                 Created = DateTimeOffset.UtcNow,
                 CustomHeaders = richSupplier.CustomHeaders,
-                Priority = GetDefaultPriority(countSuppliers + 1)
+                Priority = GetDefaultPriority(countSuppliers + 1),
+                CanUseGrpc = richSupplier.CanUseGrpc
             });
 
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -124,6 +125,7 @@ public class SupplierService : ISupplierService
             supplier.ReservationsContacts = richSupplier.ReservationsContacts;
             supplier.Modified = DateTimeOffset.UtcNow;
             supplier.CustomHeaders = richSupplier.CustomHeaders;
+            supplier.CanUseGrpc = richSupplier.CanUseGrpc;
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);

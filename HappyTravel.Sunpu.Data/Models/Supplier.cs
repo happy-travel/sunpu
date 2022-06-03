@@ -22,4 +22,5 @@ public class Supplier
     public DateTimeOffset? Modified { get; set; }
     public Dictionary<string, string>? CustomHeaders { get; set; }
     public Dictionary<AccommodationDataTypes, int>? Priority { get; set; }
+    public bool CanUseGrpc { get; set; }
 }
