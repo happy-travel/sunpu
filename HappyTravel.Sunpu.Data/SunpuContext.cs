@@ -17,7 +17,6 @@ public class SunpuContext : DbContext
             e.HasKey(s => s.Id);
             e.Property(s => s.Code).IsRequired();
             e.Property(s => s.Name).IsRequired();
-            e.Property(s => s.IsEnabled).IsRequired();
             e.Property(s => s.ConnectorUrl).IsRequired();
             e.Property(s => s.IsMultiRoomFlowSupported).IsRequired();
             e.Property(s => s.WebSite);
@@ -35,7 +34,6 @@ public class SunpuContext : DbContext
             e.ToTable("SupplierActivationHistory");
             e.HasKey(h => h.Id);
             e.Property(h => h.SupplierId).IsRequired();
-            e.Property(h => h.IsEnabled).IsRequired();
             e.Property(h => h.Reason).IsRequired();
             e.Property(h => h.Created).IsRequired();
         });
