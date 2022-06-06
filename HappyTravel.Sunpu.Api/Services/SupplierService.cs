@@ -171,10 +171,15 @@ public class SupplierService : ISupplierService
     public Task<Result> SetEnablementState(string supplierCode, EnablementState enablementState, string reason, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierCode, cancellationToken)
+            .Ensure(IsEnablementStateValid, "Enablement state is not valid")
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(SetState)
                 .Bind(SaveToHistory))
             .Tap(RefreshStorage);
+
+
+        bool IsEnablementStateValid(Supplier _)
+            => Enum.IsDefined(typeof(EnablementState), enablementState);
 
 
         Task SetState(Supplier supplier)
