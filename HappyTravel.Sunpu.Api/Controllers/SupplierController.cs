@@ -1,6 +1,5 @@
 ﻿using HappyTravel.Sunpu.Api.Models;
 using HappyTravel.Sunpu.Api.Services;
-using HappyTravel.Sunpu.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,33 +78,7 @@ public class SupplierController : BaseController
     public async Task<IActionResult> Delete([FromRoute] string supplierCode, CancellationToken cancellationToken)
         => NoContentOrBadRequest(await _supplierService.Delete(supplierCode, cancellationToken));
 
-
-    /// <summary>
-    /// Activates specified supplier
-    /// </summary>
-    /// <param name="supplierCode">Code of the supplier</param>
-    /// <param name="reason">Reason for activating the supplier</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    [HttpPost("{supplierCode}/activate")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Activate([FromRoute] string supplierCode, [FromQuery] string reason, CancellationToken cancellationToken)
-        => NoContentOrBadRequest(await _supplierService.Activate(supplierCode, reason, cancellationToken));
-
-
-    /// <summary>
-    /// Deactivates specified supplier
-    /// </summary>
-    /// <param name="supplierCode">Code of the supplier</param>
-    /// <param name="reason">Reason for deactivating the supplier</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    [HttpPost("{supplierCode}/deactivate")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Deactivate([FromRoute] string supplierCode, [FromQuery] string reason, CancellationToken cancellationToken)
-        => NoContentOrBadRequest(await _supplierService.Deactivate(supplierCode, reason, cancellationToken));
-
-
+    
     /// <summary>
     /// Sets enablement state for supplier
     /// </summary>

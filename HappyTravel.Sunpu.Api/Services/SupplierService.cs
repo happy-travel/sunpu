@@ -58,7 +58,6 @@ public class SupplierService : ISupplierService
             {
                 Name = richSupplier.Name,
                 Code = richSupplier.Code,
-                IsEnabled = richSupplier.IsEnabled,
                 EnablementState = richSupplier.EnablementState,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
@@ -169,95 +168,18 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Activate(string supplierCode, string reason, CancellationToken cancellationToken)
-    {
-        return GetSupplier(supplierCode, cancellationToken)
-            .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
-                .Tap(Activate)
-                .Bind(SaveToHistory))
-            .Tap(RefreshStorage);
-
-
-        Task Activate(Supplier supplier)
-        {
-            supplier.IsEnabled = true;
-            _sunpuContext.Suppliers.Update(supplier);
-
-            return _sunpuContext.SaveChangesAsync(cancellationToken);
-        }
-
-
-        async Task<Result> SaveToHistory(Supplier supplier)
-        {
-            if (string.IsNullOrWhiteSpace(reason))
-                return Result.Failure("The reason for activation is not specified");
-
-            _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
-            {
-                SupplierId = supplier.Id,
-                IsEnabled = true,
-                Reason = reason,
-                Created = DateTime.UtcNow
-            });
-            await _sunpuContext.SaveChangesAsync(cancellationToken);
-
-            return Result.Success();
-        }
-
-
-        Task RefreshStorage()
-            => _supplierStorage.Refresh(cancellationToken);
-    }
-
-
-    public Task<Result> Deactivate(string supplierCode, string reason, CancellationToken cancellationToken)
-    {
-        return GetSupplier(supplierCode, cancellationToken)
-            .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
-                .Tap(Deactivate)
-                .Bind(SaveToHistory))
-            .Tap(RefreshStorage);
-
-
-        Task Deactivate(Supplier supplier)
-        {
-            supplier.IsEnabled = false;
-            _sunpuContext.Suppliers.Update(supplier);
-
-            return _sunpuContext.SaveChangesAsync(cancellationToken);
-        }
-
-
-        async Task<Result> SaveToHistory(Supplier supplier)
-        {
-            if (string.IsNullOrWhiteSpace(reason))
-                return Result.Failure("The reason for deactivation is not specified");
-
-            _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
-            {
-                SupplierId = supplier.Id,
-                IsEnabled = false,
-                Reason = reason,
-                Created = DateTime.UtcNow
-            });
-            await _sunpuContext.SaveChangesAsync(cancellationToken);
-
-            return Result.Success();
-        }
-
-
-        Task RefreshStorage()
-            => _supplierStorage.Refresh(cancellationToken);
-    }
-
-
     public Task<Result> SetEnablementState(string supplierCode, EnablementState enablementState, string reason, CancellationToken cancellationToken)
     {
         return GetSupplier(supplierCode, cancellationToken)
+            .Ensure(IsEnablementStateValid, "Enablement state is not valid")
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(SetState)
                 .Bind(SaveToHistory))
             .Tap(RefreshStorage);
+
+
+        bool IsEnablementStateValid(Supplier _)
+            => Enum.IsDefined(typeof(EnablementState), enablementState);
 
 
         Task SetState(Supplier supplier)
@@ -277,7 +199,6 @@ public class SupplierService : ISupplierService
             _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
             {
                 SupplierId = supplier.Id,
-                IsEnabled = supplier.IsEnabled,
                 EnablementState = enablementState,
                 Reason = reason,
                 Created = DateTime.UtcNow

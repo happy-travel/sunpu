@@ -12,7 +12,6 @@ public static class SupplierExtension
             Id = supplier.Id,
             Code = supplier.Code,
             Name = supplier.Name,
-            IsEnabled = supplier.IsEnabled,
             EnablementState = supplier.EnablementState,
             ConnectorUrl = supplier.ConnectorUrl,
             ConnectorGrpcEndpoint = supplier.ConnectorGrpcEndpoint,
@@ -29,7 +28,6 @@ public static class SupplierExtension
         {
             Code = supplier.Code,
             Name = supplier.Name,
-            IsEnabled = supplier.IsEnabled,
             EnablementState = supplier.EnablementState,
             ConnectorUrl = supplier.ConnectorUrl,
             ConnectorGrpcEndpoint = supplier.ConnectorGrpcEndpoint,
