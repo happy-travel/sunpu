@@ -22,4 +22,5 @@ public class Supplier
     public Dictionary<string, string>? CustomHeaders { get; set; }
     public Dictionary<AccommodationDataTypes, int>? Priority { get; set; }
     public bool CanUseGrpc { get; set; }
+    public string? GiataCode { get; set; }
 }

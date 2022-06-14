@@ -70,7 +70,8 @@ public class SupplierService : ISupplierService
                 Created = DateTimeOffset.UtcNow,
                 CustomHeaders = richSupplier.CustomHeaders,
                 Priority = GetDefaultPriority(countSuppliers + 1),
-                CanUseGrpc = richSupplier.CanUseGrpc
+                CanUseGrpc = richSupplier.CanUseGrpc,
+                GiataCode = richSupplier.GiataCode
             });
 
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -125,6 +126,7 @@ public class SupplierService : ISupplierService
             supplier.Modified = DateTimeOffset.UtcNow;
             supplier.CustomHeaders = richSupplier.CustomHeaders;
             supplier.CanUseGrpc = richSupplier.CanUseGrpc;
+            supplier.GiataCode = richSupplier.GiataCode;
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);

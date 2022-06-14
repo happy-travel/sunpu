@@ -6,6 +6,7 @@ using HappyTravel.Sunpu.Data;
 using HappyTravel.Sunpu.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -14,9 +15,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HappyTravel.Sunpu.Data.Migrations
 {
     [DbContext(typeof(SunpuContext))]
-    partial class SunpuContextModelSnapshot : ModelSnapshot
+    [Migration("20220614152302_FillGiataCode")]
+    partial class FillGiataCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
