@@ -8,7 +8,7 @@ public class Supplier
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public EnablementState EnablementState { get; set; }
+    public EnableState EnableState { get; set; }
     public string ConnectorUrl { get; set; } = string.Empty;
     public string? ConnectorGrpcEndpoint { get; set; }
     public bool IsMultiRoomFlowSupported { get; set; }

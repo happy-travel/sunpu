@@ -80,17 +80,17 @@ public class SupplierController : BaseController
 
     
     /// <summary>
-    /// Sets enablement state for supplier
+    /// Sets enable state for supplier
     /// </summary>
     /// <param name="supplierCode">Code of the supplier</param>
     /// <param name="request">Change enablement state request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns></returns>
-    [HttpPost("{supplierCode}/set-enablement-state")]
+    [HttpPost("{supplierCode}/enable-state")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> SetEnablementState([FromRoute] string supplierCode, [FromBody] SetEnablementStateRequest request, CancellationToken cancellationToken) 
-        => NoContentOrBadRequest(await _supplierService.SetEnablementState(supplierCode, request.State, request.Reason, cancellationToken));
+    public async Task<IActionResult> SetEnableState([FromRoute] string supplierCode, [FromBody] SetEnableStateRequest request, CancellationToken cancellationToken) 
+        => NoContentOrBadRequest(await _supplierService.SetEnableState(supplierCode, request.State, request.Reason, cancellationToken));
 
 
     private readonly ISupplierService _supplierService;

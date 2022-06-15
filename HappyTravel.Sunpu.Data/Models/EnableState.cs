@@ -1,6 +1,6 @@
 namespace HappyTravel.Sunpu.Data.Models;
 
-public enum EnablementState
+public enum EnableState
 {
     Disabled = 0,
     TestOnly = 1,
