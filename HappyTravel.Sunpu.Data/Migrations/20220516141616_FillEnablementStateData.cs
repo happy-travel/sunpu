@@ -9,7 +9,7 @@ namespace HappyTravel.Sunpu.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.UpdateData("Suppliers", "IsEnabled", true, "EnablementState", (int) EnablementState.Enabled);
+            migrationBuilder.UpdateData("Suppliers", "IsEnabled", true, "EnablementState", 2);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
