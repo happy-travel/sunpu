@@ -21,9 +21,10 @@ builder.ConfigureAppConfiguration();
 builder.ConfigureLogging();
 builder.ConfigureSentry();
 builder.ConfigureServiceProvider();
-builder.ConfigureServices(configuration);
+builder.ConfigureServices();
 builder.ConfigureDatabaseOptions(databaseOptions);
 builder.ConfigureAuthentication();
+builder.ConfigureNats();
 
 var app = builder.Build();
 
