@@ -11,5 +11,5 @@ public interface ISupplierService
     Task<Result> Add(RichSupplier richSupplier, CancellationToken cancellationToken);
     Task<Result> Modify(string supplierCode, RichSupplier richSupplier, CancellationToken cancellationToken);
     Task<Result> Delete(string supplierCode, CancellationToken cancellationToken);
-    Task<Result> SetEnablementState(string supplierCode, EnablementState enablementState, string reason, CancellationToken cancellationToken);
+    Task<Result> SetEnableState(string supplierCode, EnableState enableState, string reason, CancellationToken cancellationToken);
 }

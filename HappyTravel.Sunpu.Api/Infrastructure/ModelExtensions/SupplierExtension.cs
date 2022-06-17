@@ -12,12 +12,13 @@ public static class SupplierExtension
             Id = supplier.Id,
             Code = supplier.Code,
             Name = supplier.Name,
-            EnablementState = supplier.EnablementState,
+            EnableState = supplier.EnableState,
             ConnectorUrl = supplier.ConnectorUrl,
             ConnectorGrpcEndpoint = supplier.ConnectorGrpcEndpoint,
             IsMultiRoomFlowSupported = supplier.IsMultiRoomFlowSupported,
             CustomHeaders = supplier.CustomHeaders,
-            CanUseGrpc = supplier.CanUseGrpc
+            CanUseGrpc = supplier.CanUseGrpc,
+            GiataCode = supplier.GiataCode
         };
     }
 
@@ -28,7 +29,7 @@ public static class SupplierExtension
         {
             Code = supplier.Code,
             Name = supplier.Name,
-            EnablementState = supplier.EnablementState,
+            EnableState = supplier.EnableState,
             ConnectorUrl = supplier.ConnectorUrl,
             ConnectorGrpcEndpoint = supplier.ConnectorGrpcEndpoint,
             IsMultiRoomFlowSupported = supplier.IsMultiRoomFlowSupported,
@@ -38,7 +39,8 @@ public static class SupplierExtension
             SupportContacts = supplier.SupportContacts,
             ReservationsContacts = supplier.ReservationsContacts,
             CustomHeaders = supplier.CustomHeaders,
-            CanUseGrpc = supplier.CanUseGrpc
+            CanUseGrpc = supplier.CanUseGrpc,
+            GiataCode = supplier.GiataCode
         };
     }
 }

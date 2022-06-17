@@ -1,19 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using HappyTravel.Sunpu.Data.Models;
 
 #nullable disable
 
 namespace HappyTravel.Sunpu.Data.Migrations
 {
-    public partial class FillEnablementStateData : Migration
+    public partial class AddJuniperGiataCodes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.UpdateData("Suppliers", "IsEnabled", true, "EnablementState", 2);
+            migrationBuilder.UpdateData("Suppliers", "Code", "bookMe", "GiataCode", "juniper");
+            migrationBuilder.UpdateData("Suppliers", "Code", "roibos", "GiataCode", "juniper");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+
         }
     }
-} 
+}
