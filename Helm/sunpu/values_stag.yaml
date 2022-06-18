@@ -64,8 +64,8 @@ resources:
     cpu: 200m
     memory: 512Mi
   requests:
-    cpu: 200m
-    memory: 512Mi
+    cpu: 25m
+    memory: 256Mi
 
 nodeSelector: {}
 
@@ -88,9 +88,9 @@ metrics:
 env:
   ASPNETCORE_URLS: http://*:80
   ASPNETCORE_ENVIRONMENT: "Staging"
-  HTDC_VAULT_ENDPOINT: "http://vault.staging.svc.k8s.staging:8200/v1/"
+  HTDC_VAULT_ENDPOINT: "http://vault.staging.svc.k8s.dev:8200/v1/"
   HTDC_SUNPU_SENTRY_ENDPOINT: "https://5b342f0cc9dc41f7be37281d22b662ed@sentry.happytravel.com/60"
   JAEGER_AGENT_HOST: "localhost"
   JAEGER_AGENT_PORT: "6831"
-  CONSUL_HTTP_ADDR: "http://consul-consul-server.staging.svc.k8s.staging:8500/"
+  CONSUL_HTTP_ADDR: "http://consul-consul-server.staging.svc.k8s.dev:8500/"
   HTDC_REDIS_HOST: "redis-sunpu"
