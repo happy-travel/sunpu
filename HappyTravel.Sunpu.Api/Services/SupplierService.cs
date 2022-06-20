@@ -61,7 +61,7 @@ public class SupplierService : ISupplierService
             {
                 Name = richSupplier.Name,
                 Code = richSupplier.Code,
-                EnablementState = richSupplier.EnablementState,
+                EnableState = richSupplier.EnableState,
                 ConnectorUrl = richSupplier.ConnectorUrl,
                 ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
                 IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
@@ -73,7 +73,8 @@ public class SupplierService : ISupplierService
                 Created = DateTimeOffset.UtcNow,
                 CustomHeaders = richSupplier.CustomHeaders,
                 Priority = GetDefaultPriority(countSuppliers + 1),
-                CanUseGrpc = richSupplier.CanUseGrpc
+                CanUseGrpc = richSupplier.CanUseGrpc,
+                GiataCode = richSupplier.GiataCode
             });
 
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -129,6 +130,7 @@ public class SupplierService : ISupplierService
             supplier.Modified = DateTimeOffset.UtcNow;
             supplier.CustomHeaders = richSupplier.CustomHeaders;
             supplier.CanUseGrpc = richSupplier.CanUseGrpc;
+            supplier.GiataCode = richSupplier.GiataCode;
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -175,12 +177,12 @@ public class SupplierService : ISupplierService
     }
 
 
-    public async Task<Result> SetEnablementState(string supplierCode, EnablementState enablementState, string reason, CancellationToken cancellationToken)
+    public async Task<Result> SetEnableState(string supplierCode, EnableState enableState, string reason, CancellationToken cancellationToken)
     {
         var supplier = await GetSupplier(supplierCode, cancellationToken);
         
         return await GetSupplier(supplierCode, cancellationToken)
-            .Ensure(IsEnablementStateValid, "Enablement state is not valid")
+            .Ensure(IsEnableStateValid, "Enablement state is not valid")
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(SetState)
                 .Bind(SaveToHistory))
@@ -188,13 +190,13 @@ public class SupplierService : ISupplierService
             .Tap(() => SendMessage(MessageBusTopics.SupplierUpdated, supplier.Value.ToSlimSupplier()));
 
 
-        bool IsEnablementStateValid(Supplier _)
-            => Enum.IsDefined(typeof(EnablementState), enablementState);
+        bool IsEnableStateValid(Supplier _)
+            => Enum.IsDefined(typeof(EnableState), enableState);
 
 
         Task SetState(Supplier supplier)
         {
-            supplier.EnablementState = enablementState;
+            supplier.EnableState = enableState;
             _sunpuContext.Suppliers.Update(supplier);
 
             return _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -204,12 +206,12 @@ public class SupplierService : ISupplierService
         async Task<Result> SaveToHistory(Supplier supplier)
         {
             if (string.IsNullOrWhiteSpace(reason))
-                return Result.Failure("The reason for changing the enablement state is not specified");
+                return Result.Failure("The reason for changing the enable state is not specified");
 
             _sunpuContext.SupplierActivationHistory.Add(new SupplierActivationHistoryEntry
             {
                 SupplierId = supplier.Id,
-                EnablementState = enablementState,
+                EnableState = enableState,
                 Reason = reason,
                 Created = DateTime.UtcNow
             });

@@ -284,7 +284,7 @@ steps:
   settings:
     mode: upgrade
     chart: ./Helm/sunpu
-    release: sunpu-staging
+    release: sunpu
     values_files: ["Helm/sunpu/values_stag.yaml"]
     namespace: staging
     skip_tls_verify: true
