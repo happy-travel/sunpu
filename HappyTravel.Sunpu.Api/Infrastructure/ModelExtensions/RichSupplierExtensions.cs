@@ -11,7 +11,7 @@ public static class RichSupplierExtensions
             Id = default, // TODO: we really need this field in slim model?
             Code = richSupplier.Code,
             Name = richSupplier.Name,
-            EnablementState = richSupplier.EnablementState,
+            EnableState = richSupplier.EnableState,
             ConnectorUrl = richSupplier.ConnectorUrl,
             ConnectorGrpcEndpoint = richSupplier.ConnectorGrpcEndpoint,
             IsMultiRoomFlowSupported = richSupplier.IsMultiRoomFlowSupported,
