@@ -72,7 +72,7 @@ public class SupplierController : BaseController
     /// </summary>
     /// <param name="supplierCode">Supplier code</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    [HttpDelete("{supplierId:int}")]
+    [HttpDelete("{supplierCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Delete([FromRoute] string supplierCode, CancellationToken cancellationToken)
