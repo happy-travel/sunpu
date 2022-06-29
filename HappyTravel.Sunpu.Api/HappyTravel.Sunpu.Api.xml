@@ -41,9 +41,9 @@
             <param name="supplierCode">Supplier code</param>
             <param name="cancellationToken">Cancellation token</param>
         </member>
-        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.SetEnablementState(System.String,HappyTravel.Sunpu.Api.Models.SetEnablementStateRequest,System.Threading.CancellationToken)">
+        <member name="M:HappyTravel.Sunpu.Api.Controllers.SupplierController.SetEnableState(System.String,HappyTravel.Sunpu.Api.Models.SetEnableStateRequest,System.Threading.CancellationToken)">
             <summary>
-            Sets enablement state for supplier
+            Sets enable state for supplier
             </summary>
             <param name="supplierCode">Code of the supplier</param>
             <param name="request">Change enablement state request</param>
@@ -63,14 +63,14 @@
             <param name="supplierPriorityByTypes">List of prioritiy suppliers by priority type</param>
             <param name="cancellationToken">Cancellation token</param>
         </member>
-        <member name="P:HappyTravel.Sunpu.Api.Models.SetEnablementStateRequest.State">
+        <member name="P:HappyTravel.Sunpu.Api.Models.SetEnableStateRequest.State">
             <summary>
-            New enablement state of a supplier
+            New enable state of a supplier
             </summary>
         </member>
-        <member name="P:HappyTravel.Sunpu.Api.Models.SetEnablementStateRequest.Reason">
+        <member name="P:HappyTravel.Sunpu.Api.Models.SetEnableStateRequest.Reason">
             <summary>
-            Reason to change enablement state of supplier
+            Reason to change enable state of supplier
             </summary>
         </member>
     </members>
