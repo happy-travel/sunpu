@@ -17,6 +17,7 @@ public static class ConfigureServicesExtension
         builder.Services.AddProblemDetailsErrorHandling();
         builder.Services.AddResponseCompression();
         builder.Services.AddMemoryCache();
+        builder.Services.AddResponseCompression();
         builder.Services.AddDistributedFlow().AddStackExchangeRedisCache(options =>
         {
             options.Configuration = EnvironmentVariableHelper.Get("Redis:Endpoint", configuration);
