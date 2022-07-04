@@ -42,6 +42,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseResponseCompression();
 app.UseEndpoints(b =>
 {
     b.MapControllers();
