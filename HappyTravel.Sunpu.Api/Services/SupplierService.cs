@@ -71,7 +71,8 @@ public class SupplierService : ISupplierService
                 CustomHeaders = richSupplier.CustomHeaders,
                 Priority = GetDefaultPriority(countSuppliers + 1),
                 CanUseGrpc = richSupplier.CanUseGrpc,
-                GiataCode = richSupplier.GiataCode
+                GiataCode = richSupplier.GiataCode,
+                IsDirectContract = richSupplier.IsDirectContract
             });
 
             await _sunpuContext.SaveChangesAsync(cancellationToken);
@@ -127,6 +128,7 @@ public class SupplierService : ISupplierService
             supplier.CustomHeaders = richSupplier.CustomHeaders;
             supplier.CanUseGrpc = richSupplier.CanUseGrpc;
             supplier.GiataCode = richSupplier.GiataCode;
+            supplier.IsDirectContract = richSupplier.IsDirectContract;
 
             _sunpuContext.Suppliers.Update(supplier);
             await _sunpuContext.SaveChangesAsync(cancellationToken);

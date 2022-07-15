@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Directory settings
 .DS_Store
+.idea/
