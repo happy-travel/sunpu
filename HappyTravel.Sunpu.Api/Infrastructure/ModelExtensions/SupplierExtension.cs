@@ -18,7 +18,8 @@ public static class SupplierExtension
             IsMultiRoomFlowSupported = supplier.IsMultiRoomFlowSupported,
             CustomHeaders = supplier.CustomHeaders,
             CanUseGrpc = supplier.CanUseGrpc,
-            GiataCode = supplier.GiataCode
+            GiataCode = supplier.GiataCode,
+            IsDirectContract = supplier.IsDirectContract
         };
     }
 
@@ -40,7 +41,8 @@ public static class SupplierExtension
             ReservationsContacts = supplier.ReservationsContacts,
             CustomHeaders = supplier.CustomHeaders,
             CanUseGrpc = supplier.CanUseGrpc,
-            GiataCode = supplier.GiataCode
+            GiataCode = supplier.GiataCode,
+            IsDirectContract = supplier.IsDirectContract
         };
     }
 }

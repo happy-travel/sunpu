@@ -23,4 +23,5 @@ public class Supplier
     public Dictionary<AccommodationDataTypes, int>? Priority { get; set; }
     public bool CanUseGrpc { get; set; }
     public string? GiataCode { get; set; }
+    public bool IsDirectContract { get; set; }
 }
