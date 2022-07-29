@@ -1,5 +1,4 @@
 ﻿using HappyTravel.StdOutLogger.Extensions;
-using HappyTravel.StdOutLogger.Infrastructure;
 using HappyTravel.Sunpu.Api.Infrastructure.Environment;
 
 namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
@@ -17,7 +16,7 @@ public static class ConfigureLoggingExtension
             builder.Logging.AddStdOutLogger(setup =>
             {
                 setup.IncludeScopes = true;
-                setup.RequestIdHeader = Constants.DefaultRequestIdHeader;
+                setup.RequestIdHeader = StdOutLogger.Infrastructure.Constants.DefaultRequestIdHeader;
                 setup.UseUtcTimestamp = true;
             });
             builder.Logging.AddSentry();

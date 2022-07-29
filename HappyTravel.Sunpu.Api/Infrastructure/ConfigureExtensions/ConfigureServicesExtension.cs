@@ -8,19 +8,19 @@ namespace HappyTravel.Sunpu.Api.Infrastructure.ConfigureExtensions;
 
 public static class ConfigureServicesExtension
 {
-    public static void ConfigureServices(this WebApplicationBuilder builder, IConfiguration configuration)
+    public static void ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddHealthChecks().AddRedis(EnvironmentVariableHelper.Get("Redis:Endpoint", configuration));
+        builder.Services.AddHealthChecks().AddRedis(EnvironmentVariableHelper.Get("Redis:Endpoint", builder.Configuration));
         builder.Services.AddProblemDetailsErrorHandling();
         builder.Services.AddResponseCompression();
         builder.Services.AddMemoryCache();
         builder.Services.AddResponseCompression();
         builder.Services.AddDistributedFlow().AddStackExchangeRedisCache(options =>
         {
-            options.Configuration = EnvironmentVariableHelper.Get("Redis:Endpoint", configuration);
+            options.Configuration = EnvironmentVariableHelper.Get("Redis:Endpoint", builder.Configuration);
         });
         builder.Services.ConfigureApiVersioning();
         builder.Services.ConfigureTracing(builder.Environment, builder.Configuration);
@@ -31,6 +31,6 @@ public static class ConfigureServicesExtension
         builder.Services.AddTransient<ISupplierService, SupplierService>();
         builder.Services.AddTransient<ISupplierPriorityService, SupplierPriorityService>();
         builder.Services.AddTransient<ISupplierStorage, SupplierStorage>();
-        
+        builder.Services.AddScoped<IMessageBus, MessageBus>();
     }
 }

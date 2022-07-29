@@ -2,6 +2,7 @@
 using FluentValidation;
 using HappyTravel.MapperContracts.Public.Accommodations.Enums;
 using HappyTravel.Sunpu.Api.Infrastructure;
+using HappyTravel.Sunpu.Api.Infrastructure.Constants;
 using HappyTravel.Sunpu.Api.Infrastructure.FunctionalExtensions;
 using HappyTravel.Sunpu.Api.Infrastructure.ModelExtensions;
 using HappyTravel.Sunpu.Api.Models;
@@ -13,10 +14,11 @@ namespace HappyTravel.Sunpu.Api.Services;
 
 public class SupplierService : ISupplierService
 {
-    public SupplierService(SunpuContext sunpuContext, ISupplierStorage supplierStorage)
+    public SupplierService(SunpuContext sunpuContext, ISupplierStorage supplierStorage, IMessageBus messageBus)
     {
         _sunpuContext = sunpuContext;
         _supplierStorage = supplierStorage;
+        _messageBus = messageBus;
     }
 
 
@@ -42,7 +44,8 @@ public class SupplierService : ISupplierService
         return Validate(richSupplier)
             .Ensure(IsUnique, "A supplier with the same code or name already exists")
             .Tap(Add)
-            .Tap(RefreshStorage);
+            .Tap(RefreshStorage)
+            .Tap(() => SendMessage(MessageBusTopics.SupplierAdded, richSupplier.ToSlimSupplier()));
 
 
         async Task<bool> IsUnique()
@@ -105,7 +108,8 @@ public class SupplierService : ISupplierService
             .Check(_ => Validate(richSupplier))
             .Ensure(IsUnique, "A supplier with the same name already exists")
             .Bind(Update)
-            .Tap(RefreshStorage);
+            .Tap(RefreshStorage)
+            .Tap(() => SendMessage(MessageBusTopics.SupplierUpdated,richSupplier.ToSlimSupplier()));
         
         
         async Task<bool> IsUnique(Supplier supplier)
@@ -151,11 +155,14 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> Delete(string supplierCode, CancellationToken cancellationToken)
+    public async Task<Result> Delete(string supplierCode, CancellationToken cancellationToken)
     {
-        return GetSupplier(supplierCode, cancellationToken)
+        var supplier = await GetSupplier(supplierCode, cancellationToken);
+        
+        return await supplier
             .Bind(Delete)
-            .Tap(RefreshStorage);
+            .Tap(RefreshStorage)
+            .Tap(() => SendMessage(MessageBusTopics.SupplierRemoved, supplier.Value.ToSlimSupplier()));
 
 
         async Task<Result> Delete(Supplier supplier)
@@ -172,14 +179,17 @@ public class SupplierService : ISupplierService
     }
 
 
-    public Task<Result> SetEnableState(string supplierCode, EnableState enableState, string reason, CancellationToken cancellationToken)
+    public async Task<Result> SetEnableState(string supplierCode, EnableState enableState, string reason, CancellationToken cancellationToken)
     {
-        return GetSupplier(supplierCode, cancellationToken)
-            .Ensure(IsEnableStateValid, "Enable state is not valid")
+        var supplier = await GetSupplier(supplierCode, cancellationToken);
+        
+        return await GetSupplier(supplierCode, cancellationToken)
+            .Ensure(IsEnableStateValid, "Enablement state is not valid")
             .BindWithTransaction(_sunpuContext, supplier => Result.Success(supplier)
                 .Tap(SetState)
                 .Bind(SaveToHistory))
-            .Tap(RefreshStorage);
+            .Tap(RefreshStorage)
+            .Tap(() => SendMessage(MessageBusTopics.SupplierUpdated, supplier.Value.ToSlimSupplier()));
 
 
         bool IsEnableStateValid(Supplier _)
@@ -238,6 +248,11 @@ public class SupplierService : ISupplierService
     }
 
 
+    private void SendMessage(string topicName, SlimSupplier message) 
+        => _messageBus.Publish(topicName, message);
+
+
     private readonly SunpuContext _sunpuContext;
     private readonly ISupplierStorage _supplierStorage;
+    private readonly IMessageBus _messageBus;
 }
